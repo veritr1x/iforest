@@ -245,11 +245,14 @@ button { cursor: pointer; }
   overflow-x: auto;
   scrollbar-width: none;
   padding-bottom: 4px;
-  -webkit-mask-image: linear-gradient(to right, #000 calc(100% - 28px), transparent);
-          mask-image: linear-gradient(to right, #000 calc(100% - 28px), transparent);
 }
 
 .key-row.verbs::-webkit-scrollbar { display: none; }
+
+.key-row.verbs.is-scrollable {
+  -webkit-mask-image: linear-gradient(to right, #000 calc(100% - 28px), transparent);
+          mask-image: linear-gradient(to right, #000 calc(100% - 28px), transparent);
+}
 
 .key {
   flex: 0 0 auto;

@@ -8,7 +8,7 @@ import {
 } from './gameData.js';
 
 const DIRECTIONS = new Set(['north', 'south', 'east', 'west']);
-const GLOBAL_COMMANDS = ['look', 'inventory', 'sleep', 'wait'];
+const GLOBAL_COMMANDS = ['look', 'inventory', 'take', 'use', 'examine', 'drop', 'attack', 'sleep', 'wait'];
 
 function clone(value) {
   return JSON.parse(JSON.stringify(value));

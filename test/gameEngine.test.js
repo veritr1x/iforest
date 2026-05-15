@@ -22,6 +22,11 @@ describe('iForest reconstructed game engine', () => {
       'west',
       'look',
       'inventory',
+      'take',
+      'use',
+      'examine',
+      'drop',
+      'attack',
       'sleep',
       'wait'
     ]);

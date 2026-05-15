@@ -254,14 +254,13 @@ function renderDirections(exits) {
 }
 
 function renderVerbs(view) {
-  const set = new Set();
-  VERB_ORDER.forEach((v) => set.add(v));
-  (view.commands || []).forEach((v) => {
-    if (!DIRECTIONS.includes(v) && v !== 'inventory') set.add(v);
-  });
+  const order = new Map(VERB_ORDER.map((v, i) => [v, i]));
+  const verbs = [...new Set(
+    (view.commands || []).filter((v) => !DIRECTIONS.includes(v) && v !== 'inventory')
+  )].sort((a, b) => (order.get(a) ?? VERB_ORDER.length) - (order.get(b) ?? VERB_ORDER.length));
 
   el.verbRow.replaceChildren(
-    ...[...set].map((verb) => {
+    ...verbs.map((verb) => {
       const button = document.createElement('button');
       button.type = 'button';
       button.className = 'key verb';
@@ -272,6 +271,13 @@ function renderVerbs(view) {
       return button;
     })
   );
+
+  requestAnimationFrame(() => {
+    el.verbRow.classList.toggle(
+      'is-scrollable',
+      el.verbRow.scrollWidth > el.verbRow.clientWidth
+    );
+  });
 }
 
 function onVerb(verb) {
