@@ -1,0 +1,31 @@
+<?xml version="1.0"?>
+<!DOCTYPE wml PUBLIC "-//WAPFORUM//DTD WML 1.1//EN" "http://www.wapforum.org/DTD/wml_1.1.xml">
+
+<wml>
+ <card id="main" title="Main menu">
+  <do type="accept" label="Play"><go href="#play"/></do>
+  <p>Welcome!</p>
+  <p><a title="Play" href="#play">Play a game</a><br/>
+  <a title="About" href="http://wap.useeverything.com/other/lsinfo.wml">About us</a><br/>
+  <a title="Terms" href="http://wap.useeverything.com/other/terms.wml">Terms</a></p>
+  <p>Visit the website for more information: http://useeverything.com</p>
+ </card>
+
+ <card id="play" title="Games">
+  <do type="accept" label="Menu"><prev/></do>
+  <p>What sort of game?<br/>
+  <a title="Multi" href="http://wap.useeverything.com/other/if.wml">Multi player</a><br/>
+  <a title="Single" href="#single">Single player</a><br/>
+  <anchor title="Menu"><prev/>Menu</anchor>
+  </p>
+ </card>
+
+ <card id="single" title="Single player">
+  <do type="accept" label="Back"><prev/></do>
+  <p>Which game?<br/>
+  <a title="Vamp" href="http://wap.useeverything.com/other/vamintro.wml">Vampire Country</a><br/>
+  <a title="UE" href="http://wap.useeverything.com/other/ue.wml">UseEverything</a><br/>
+  <anchor title="Back"><prev/>Back</anchor>
+  </p>
+ </card>
+</wml>

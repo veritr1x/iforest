@@ -1,0 +1,40 @@
+<?xml version="1.0"?>
+<!DOCTYPE wml PUBLIC "-//WAPFORUM//DTD WML 1.1//EN" "http://www.wapforum.org/DTD/wml_1.1.xml">
+<wml>
+<card id="main" title="Peter">
+<onevent type="prev"><noop/></onevent>
+<onevent type="onenterforward"><refresh><setvar name="NOUN" value="0"/>
+<setvar name="COM" value="look"/>
+<setvar name="N2" value="0"/>
+</refresh></onevent>
+<p>You walk south.</p>
+<p>You are at reception. There's not a lot here, except for a big desk in the centre of the room. The room continues to the east, and there's a door to the west. The exit to the street is to the south. You can go: north, south, east.</p><p>
+There is a locked door, the receptionist here. </p><p>
+?: <select name="COM" ivalue="n">
+<option value="n" onpick="#run">North</option>
+<option value="s" onpick="#run">South</option>
+<option value="e" onpick="#run">East</option>
+<option value="take" onpick="#single">Take</option>
+<option value="use" onpick="#single">Use</option>
+<option value="attack" onpick="#single">Attack</option>
+<option value="examine" onpick="#single">Examine</option>
+<option value="i" onpick="#run">Inventory</option>
+<option value="swap" onpick="#run">Swap</option>
+</select>
+</p></card>
+<card id="runwith">
+<do type="accept" label="Back"><prev/></do>
+<p><anchor>$(COM) it<go href="#run"><setvar name="N2" value="0"/></go></anchor></p>
+<p><anchor>$(COM) it with...<go href="#run"><setvar name="N2" value="63"/></go></anchor></p>
+</card>
+<card id="run" onenterforward="Driver?state=quHXaeVepyOjEUwf7&amp;c=$(COM)&amp;n1=$(NOUN)&amp;n2=$(N2)&amp;c1=Peter&amp;c2=Jane"><p>
+<a href="Driver?state=quHXaeVepyOjEUwf7&amp;c=$(COM)&amp;n1=$(NOUN)&amp;n2=$(N2)&amp;c1=Peter&amp;c2=Jane">Click here</a>
+</p></card>
+<card id="single"><p>
+$(COM) what: <select name="NOUN">
+<option value="0" onpick="#main">never mind</option>
+<option value="1" onpick="#runwith">door</option>
+<option value="2" onpick="#runwith">receptionist</option>
+</select>
+</p>
+</card></wml>

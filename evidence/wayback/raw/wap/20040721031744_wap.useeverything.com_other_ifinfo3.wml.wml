@@ -1,0 +1,13 @@
+<?xml version="1.0"?> 
+<!DOCTYPE wml PUBLIC "-//WAPFORUM//DTD WML 1.1//EN" "http://www.wapforum.org/DTD/wml_1.1.xml"> 
+ 
+<wml> 
+  <card id="main" title="Skills"> 
+		<p>Your character has attributes such as strength and experience. These will change as you progress through the game, and will affect your ability to fight. If your strength is particularly low, you might need to find some food or water.</p>
+		<p>If your strength falls too low, you will find yourself in the Forestown hospital. Anything that you were carrying will be moved to the town's lost property rooms.</p>
+		<p>Some actions need a particular skill. For instance, you can't dive to the bottom of a pool unless you can swim. You can't get to the top of a cliff unless you can climb or fly. Skills in iForest are simple things- all you need is a skill stone. These are scattered throughout the world, although it is rumoured that fairies sometimes give them to travelers.</p>
+		<p>If someone steals your skill stone, you no longer have that skill. As you progress through the game, you will find that you acquire some skills without needing the stones any more.</p>
+		<p><a href="ifinfo4.wml">Next...</a></p>
+		<p><a href="if.wml">Menu</a></p>
+  </card> 
+</wml>

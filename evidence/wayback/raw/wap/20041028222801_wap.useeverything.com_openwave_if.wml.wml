@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<!DOCTYPE wml PUBLIC "-//WAPFORUM//DTD WML 1.1//EN" "http://www.wapforum.org/DTD/wml_1.1.xml">
+
+<wml>
+ <card id="main" title="Menu">
+  <do type="accept"><go href="ifdisc.wml"/></do>
+  <p><img src="iforestn.wbmp" alt="iForest"/></p>
+  <p><select>
+   <option onpick="ifinfo.wml">Instructions</option>
+   <option onpick="ifdisc.wml">Play</option>
+   <option onpick="index.wml">Menu</option>
+   </select></p>
+  <p>There&apos;s a lot of information, including live game cameras, at www.useeverything.com</p>
+  </card>
+</wml>

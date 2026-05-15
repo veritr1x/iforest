@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+<!DOCTYPE wml PUBLIC "-//WAPFORUM//DTD WML 1.1//EN" "http://www.wapforum.org/DTD/wml_1.1.xml">
+
+<wml>
+  <card id="main" title="Rules">
+    <p>Rules</p>
+    <p>When you are playing iForest, there are some simple rules and conditions that you must accept. By playing the game, you are showing that you accept them:</p>
+    <p>1. Your iForest character (which you access through a login name) is not your property, and has no value. It may be deleted or altered by the game administrator at any time.</p>
+    <p>2. You will not use a login name that is offensive or antisocial. If you do this your character may be deleted.</p>
+    <p>3. You will not play the game when common-sense says that you should not. For example, do not play when you are driving or doing anything that requires concentration.</p>
+    <p>4. The password that you provide must be unique to iForest. Do not use anything that you consider to be personal.
+    <p><a href="if.wml">Back</a></p>
+  </card>
+</wml>

@@ -1,0 +1,13 @@
+<?xml version="1.0"?>
+<!DOCTYPE wml PUBLIC "-//WAPFORUM//DTD WML 1.1//EN" "http://www.wapforum.org/DTD/wml_1.1.xml">
+
+<wml>
+  <card id="main" title="Instructions">
+		<p>These instructions should be enough to get you started. If you want some more detail, go to the website at www.littlescreen.co.uk.</p>
+		<p>The world of iForest is quite simple. There are lots of players, each of which can move around, pick up objects and use them. You can move as often as you like, and don't need to wait for other players to have their turn.</p>
+		<p>You can pick up any object that isn't too heavy and put it into your pockets. If your pockets are full, you will need to drop something before picking anything else up. Once you're holding an object you can use it, depending on what it can do.</p>
+		<p><a href="ifinfo2.wml">Next...</a></p>
+		<p><a href="if.wml">Menu</a></p>
+  </card>
+</wml>
+

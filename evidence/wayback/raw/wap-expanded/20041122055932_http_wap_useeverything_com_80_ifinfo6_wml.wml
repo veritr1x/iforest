@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<!DOCTYPE wml PUBLIC "-//WAPFORUM//DTD WML 1.1//EN" "http://www.wapforum.org/DTD/wml_1.1.xml">
+
+<wml>
+  <card id="main" title="Description">
+		<p>When you first enter a location you are given a brief description of where you are. This description will also contain the results of your last action. An example is as follows:</p>
+		<p>-----</p>
+		<p>You follow the path east.</p>
+		<p>You are deep in the forest. The trees almost completely block out the light above you. The path you are on leads east and west.</p>
+		<p>OK</p>
+		<p>-----</p>
+		<p>To progress to the action view, click the "OK" link. If you don't do anything for about 20 seconds, the screen will automatically refresh itself, informing you of anything that has happened in the meantime.</p>
+		<p><a href="rules.wml">Next...</a></p>
+                <p><a href="if.wml">Menu</a></p>
+  </card>
+</wml>
+

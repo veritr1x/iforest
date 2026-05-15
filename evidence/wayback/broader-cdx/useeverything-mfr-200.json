@@ -1,0 +1,6 @@
+[["timestamp","original","mimetype","statuscode","digest","length"],
+["20041109051542","http://useeverything.com:80/servlets/mfr","text/vnd","200","HTY74AYCN2KSQ4WNIKUD2BE6QFXZ6DSX","739"],
+["20041110082204","http://useeverything.com:80/servlets/mfr?new=false&amp","text/vnd","200","HTY74AYCN2KSQ4WNIKUD2BE6QFXZ6DSX","742"],
+["20041110081931","http://useeverything.com:80/servlets/mfr?new=true&amp","text/vnd","200","HTY74AYCN2KSQ4WNIKUD2BE6QFXZ6DSX","746"],
+["20061127142228","http://useeverything.com/servlets/mfr?fun=spycamera","text/html","200","5NMF6SS77YXDNCBSWKTN7NVFQ3VHO3DN","595"],
+["20061127142235","http://useeverything.com/servlets/mfr?fun=spycamera&view=marker","text/html","200","BQMB2UX5GMVYKVRU5UPKRFUF3DO2LMNC","606"]]

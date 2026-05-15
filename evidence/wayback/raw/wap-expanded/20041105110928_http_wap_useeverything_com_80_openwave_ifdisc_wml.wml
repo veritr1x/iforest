@@ -1,0 +1,12 @@
+<?xml version="1.0"?>
+<!DOCTYPE wml PUBLIC "-//WAPFORUM//DTD WML 1.1//EN" "http://www.wapforum.org/DTD/wml_1.1.xml">
+
+<wml>
+  <card id="main" title="Logins">
+    <do type="accept" label="Play"><go href="http://useeverything.com/servlets/mfr"/></do>
+    <do type="options" label="Back"><prev/></do>
+    <p>On the next page you will need to enter a name and a password. The name is what all other players in the game will see you as. It does not need to be your real name.</p>
+    <p>Please do not use a password that you have used elsewhere, or one that you consider personal. Just make up something silly.</p>
+    <p>(Remember this site has Terms of Use. See the <a title="Home" href="index.wml">homepage</a>)</p>
+  </card>
+</wml>

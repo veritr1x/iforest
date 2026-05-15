@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<!DOCTYPE wml PUBLIC "-//WAPFORUM//DTD WML 1.1//EN" "http://www.wapforum.org/DTD/wml_1.1.xml">
+<wml>
+<card id="top" title="In the lift">
+<do type="accept" label="USE"><go href="#main"/></do>
+<p>Do you want to:<br/>
+<a href="#main">Use lift</a><br/>
+<a href="http://useeverything.com/servlets/Driver?c=s&amp;state=QuI02geROTqRf9Vva&amp;c1=c&amp;c2=Jane">Exit lift</a>
+</p></card>
+<card id="main" title="In the lift">
+<do type="accept" label="GO"><go href="#lift"><setvar name="CODE" value="beginning"/></go></do>
+<p>Enter a level code: <input value="beginning" name="CODE" format="MM*M"/></p>
+<p><a title="GO" href="#lift">Go to level</a></p>
+</card>
+<card id="lift" title="Lift">
+<p>You press the button. The lift descends rapidly for several seconds, then the doors open. The lift disappears...</p>
+<do type="accept" label="Ok"><go href="http://useeverything.com/servlets/Driver?code=$(CODE)&amp;c1=c&amp;c2=Jane"/></do>
+<p><a title="Ok" href="http://useeverything.com/servlets/Driver?code=$(CODE)&amp;c1=c&amp;c2=Jane">Ok</a></p>
+</card>
+</wml>

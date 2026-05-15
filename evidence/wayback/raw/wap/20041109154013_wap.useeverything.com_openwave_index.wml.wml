@@ -1,0 +1,38 @@
+<?xml version="1.0"?>
+<!DOCTYPE wml PUBLIC "-//WAPFORUM//DTD WML 1.1//EN" "http://www.wapforum.org/DTD/wml_1.1.xml">
+
+<wml>
+ <card id="main" title="Main menu">
+  <do type="accept" label="Play"><go href="#play"/></do>
+  <p>Welcome!
+   <select>
+    <option onpick="#play">Play a game</option>
+    <option onpick="http://wap.useeverything.com/openwave/lsinfo.wml">About us</option>
+    <option onpick="http://wap.useeverything.com/openwave/terms.wml">Terms</option>
+   </select>
+  </p>
+  <p>Visit the website for more information: http://useeverything.com</p>
+ </card>
+
+ <card id="play" title="Games">
+  <do type="accept" label="Menu"><prev/></do>
+  <p>What sort of game?
+   <select>
+    <option onpick="http://wap.useeverything.com/openwave/if.wml">Multi player</option>
+    <option onpick="#single">Single player</option>
+    <option><onevent type="onpick"><prev/></onevent>Menu</option>
+   </select>
+  </p>
+ </card>
+
+ <card id="single" title="Single player">
+  <do type="accept" label="Back"><prev/></do>
+  <p>Which game?
+   <select>
+    <option onpick="http://wap.useeverything.com/openwave/vamintro.wml">Vampire Country</option>
+    <option onpick="http://wap.useeverything.com/openwave/ue.wml">UseEverything</option>
+    <option><onevent type="onpick"><prev/></onevent>Back</option>
+   </select>
+  </p>
+ </card>
+</wml>

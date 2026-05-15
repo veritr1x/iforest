@@ -1,0 +1,14 @@
+<?xml version="1.0"?> 
+<!DOCTYPE wml PUBLIC "-//WAPFORUM//DTD WML 1.1//EN" "http://www.wapforum.org/DTD/wml_1.1.xml"> 
+ 
+<wml> 
+  <card id="main" title="Starting">
+		<p>To start the game, you need to create a new character. Go back to the main menu and choose "play".</p>
+		<p>At the login prompt, choose a name for your character, and a password. Then click "New character". If your password was less than 5 letters long, or if your character name has already been taken, you will be asked to try again.</p>
+		<p>Choosing an unusual name for your character is less likely to conflict with anybody else's name. If you are having trouble, try adding numbers to the end.</p>  
+		<p>After successfully choosing a name and password, you will be taken to the game. Bookmark your position on your browser straight away, as this will let you come back without having to login again.</p>
+		<p><a href="ifinfo6.wml">Next...</a></p>
+		<p><a href="if.wml">Menu</a></p>
+  </card> 
+</wml>
+

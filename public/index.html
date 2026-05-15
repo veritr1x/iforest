@@ -1,0 +1,75 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <meta name="theme-color" content="#0a0a0a" />
+    <title>iForest</title>
+    <link rel="icon" href="data:," />
+    <link rel="stylesheet" href="/styles.css" />
+  </head>
+  <body>
+    <div class="phone" role="application" aria-label="iForest WAP game">
+      <header class="chrome-bar">
+        <span class="signal" aria-hidden="true">.ill</span>
+        <span class="bar-title">iForest</span>
+        <button id="menu-button" class="chrome-key" type="button">Menu</button>
+      </header>
+
+      <main class="screen" id="screen" tabindex="-1">
+        <p class="eyebrow" aria-hidden="true">wap.useeverything.com / iforest</p>
+
+        <p id="player-line" class="status-line"></p>
+        <p id="world-line" class="status-line dim"></p>
+
+        <h2 id="room-title" class="room-title">iForest</h2>
+        <figure class="room-figure">
+          <img id="room-image" alt="" hidden />
+        </figure>
+        <p id="room-description" class="room-description"></p>
+        <p id="message" class="message" role="status" aria-live="polite"></p>
+      </main>
+
+      <section class="composer" aria-label="Commands">
+        <div id="armed-row" class="armed-row" hidden>
+          <span>Pick object for <strong id="armed-verb"></strong></span>
+          <button type="button" id="armed-cancel" class="ghost-key" aria-label="Cancel">x</button>
+        </div>
+        <div id="direction-row" class="key-row directions" role="group" aria-label="Directions"></div>
+        <div id="verb-row" class="key-row verbs" role="group" aria-label="Actions"></div>
+        <div id="object-row" class="key-row verbs" role="group" aria-label="Objects" hidden></div>
+      </section>
+
+      <nav class="tab-bar" aria-label="Status panels">
+        <button class="tab-key" type="button" data-panel="inventory">Inv</button>
+        <button class="tab-key" type="button" data-panel="here">Here</button>
+        <button class="tab-key" type="button" data-panel="systems">Sys</button>
+        <button class="tab-key" type="button" data-panel="evidence">Ev</button>
+      </nav>
+
+      <aside id="sheet" class="sheet" hidden aria-label="Status panel">
+        <header class="sheet-header">
+          <h2 id="sheet-title">Inventory</h2>
+          <button type="button" id="sheet-close" class="ghost-key" aria-label="Close panel">x</button>
+        </header>
+        <div id="sheet-body" class="sheet-body"></div>
+      </aside>
+    </div>
+
+    <dialog id="menu-dialog" class="menu-dialog" aria-label="New game">
+      <form id="start-form" class="menu-form">
+        <h2>New game</h2>
+        <label>
+          Player name
+          <input id="player-name" name="name" maxlength="12" value="Jane" autocomplete="off" />
+        </label>
+        <div class="menu-actions">
+          <button type="button" id="menu-cancel">Cancel</button>
+          <button type="submit">Start</button>
+        </div>
+      </form>
+    </dialog>
+
+    <script type="module" src="/app.js"></script>
+  </body>
+</html>

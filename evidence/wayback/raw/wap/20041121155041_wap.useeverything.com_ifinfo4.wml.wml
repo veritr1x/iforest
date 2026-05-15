@@ -1,0 +1,14 @@
+<?xml version="1.0"?> 
+<!DOCTYPE wml PUBLIC "-//WAPFORUM//DTD WML 1.1//EN" "http://www.wapforum.org/DTD/wml_1.1.xml"> 
+ 
+<wml> 
+  <card id="main" title="Magic"> 
+		<p>The world of iForest is full of magic. The inhabitants of Forestown talk of fairies who quietly keep the world in order. If a key gets lost, or a person becomes stuck in a tree, sooner or later the fairies will sort it out.</p>
+		<p>If your strength becomes critically low and you lose consciousness, the fairies will pick you up and take you to Forestown's hospital.</p>
+		<p>Magic is an everyday thing in iForest. Nobody really understands it, but it's always there. The most tangible kind of magic is the teleportation sandwich. These are curious foods that some think are made by the fairies. If you eat one, you will be transported to wherever that sandwich was made.</p>
+		<p>You can often find teleportation sandwiches in far-off regions. They can be used to move between places a long way apart, without having to suffer the boredom of going there on foot.</p>
+		<p><a href="ifinfo5.wml">Next...</a></p>
+		<p><a href="if.wml">Menu</a></p>
+  </card> 
+</wml>
+

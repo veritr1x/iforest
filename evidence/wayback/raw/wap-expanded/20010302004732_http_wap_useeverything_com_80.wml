@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<!DOCTYPE wml PUBLIC "-//WAPFORUM//DTD WML 1.1//EN" "http://www.wapforum.org/DTD/wml_1.1.xml">
+
+<wml>
+
+  <card id="index">
+    <!-- Possible <onevent> elements here. -->
+
+    <do type="unknown" label="Start"><go href="choose.wml"/></do>
+
+    <p align="center">
+      <!-- Card implementation here. -->
+      UseEverything.com
+    </p>
+    <p><a href="what.wml">What is it?</a></p>
+    <p><a href="instructions.wml">Instructions</a></p>
+    <p><a href="choose.wml">Start game</a></p>
+<!--<p><a href="help.wml">Help</a></p>-->
+  </card>
+
+  <!-- Additional <card> elements here. -->
+
+</wml>

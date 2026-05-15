@@ -1,0 +1,12 @@
+<?xml version="1.0"?>
+<!DOCTYPE wml PUBLIC "-//WAPFORUM//DTD WML 1.1//EN" "http://www.wapforum.org/DTD/wml_1.1.xml">
+
+<wml>
+  <card id="main" title="Menu">
+    <p><img src="iforestn.wbmp" alt="iForest"/></p>
+		<p><a title="Ins" href="ifinfo.wml">Instructions</a></p>
+		<p><a title="Play" href="ifdisc.wml">Play</a></p>
+                <p>There&apos;s a lot of information, including live game cameras, at www.useeverything.com</p>
+		<p><a title="Back" href="index.wml">Back</a></p>
+  </card>
+</wml>
