@@ -1,4 +1,5 @@
 import {
+  FACES,
   HOUSEKEEPING_RESET_INTERVAL,
   items,
   MAX_POCKETS,
@@ -6,6 +7,15 @@ import {
   recoveredSystems,
   rooms
 } from './gameData.js';
+
+function pickFace(name, gender) {
+  const list = FACES[gender] || FACES.male;
+  let hash = 0;
+  for (const ch of String(name)) {
+    hash = (hash * 31 + ch.charCodeAt(0)) >>> 0;
+  }
+  return list[hash % list.length];
+}
 
 const DIRECTIONS = new Set(['north', 'south', 'east', 'west']);
 const GLOBAL_COMMANDS = ['look', 'inventory', 'take', 'use', 'examine', 'drop', 'attack', 'sleep', 'wait'];
@@ -44,6 +54,10 @@ function visibleNouns(game, room) {
     fixed.push('thorn');
   }
 
+  if (room.id === 'service-corridor' && game.flags.foundLostWoman) {
+    fixed.push('marker');
+  }
+
   return [...new Set([...fixed, ...placed])];
 }
 
@@ -72,6 +86,8 @@ function describe(game, message = '') {
       inventory,
       skills,
       spells: game.player.spells || [],
+      face: game.player.face || null,
+      gender: game.player.gender || null,
       markerOwner: game.world.claimedMarkers?.[room.id] || null,
       systems: recoveredSystems,
       turn: game.world.turns,
@@ -80,12 +96,22 @@ function describe(game, message = '') {
   };
 }
 
-export function createGame({ name = 'Tourist' } = {}) {
+export function createGame({ name = 'Tourist', gender = 'male', face = null, intro = false } = {}) {
   const safeName = String(name || 'Tourist').trim().slice(0, 12) || 'Tourist';
+  const safeGender = gender === 'female' ? 'female' : 'male';
+  const chosenFace = face && (FACES[safeGender] || []).includes(face)
+    ? face
+    : pickFace(safeName, safeGender);
+  const startLocation = intro ? 'forestown-reception' : 'forestown-square';
+  const welcome = intro
+    ? "The receptionist looks up, unimpressed. Sign the forms when you are ready to descend."
+    : 'Welcome to Forestown.';
   const game = {
     player: {
       name: safeName,
-      location: 'forestown-square',
+      gender: safeGender,
+      face: chosenFace,
+      location: startLocation,
       strength: MAX_STRENGTH,
       experience: 0,
       inventory: [],
@@ -100,10 +126,10 @@ export function createGame({ name = 'Tourist' } = {}) {
       turns: 0,
       resets: 0
     },
-    log: ['Welcome to Forestown.']
+    log: [welcome]
   };
 
-  return describe(game, 'Welcome to Forestown.');
+  return describe(game, welcome);
 }
 
 export function getRoom(roomId) {
@@ -207,6 +233,18 @@ export function applyCommand(currentGame, command) {
     return castSpell(game, target);
   }
 
+  if (verb === 'sign') {
+    if (room.id !== 'forestown-reception') {
+      return describe(game, 'There is nothing to sign here.');
+    }
+    game.flags.introSigned = true;
+    game.player.location = 'forestown-square';
+    return describe(
+      game,
+      'You sign the forms on the dotted line and hurry into the lift. The receptionist watches you go. "Don\'t get lost!" she calls. The doors close, the lift descends, and they open again on Forestown Main Square.'
+    );
+  }
+
   if (verb === 'stamp') {
     if (room.id !== 'tourist-info-booth') {
       return describe(game, 'There is no tourist information booth here.');
@@ -277,6 +315,10 @@ function dropItem(game, room, target) {
 }
 
 function examine(game, room, target) {
+  if (room.id === 'forestown-reception' && target === 'receptionist') {
+    return describe(game, 'She watches with the patience of someone who has seen many tourists vanish into iForest. Her pen taps the form clipboard.');
+  }
+
   if (room.id === 'forest-edge' && target === 'wolf') {
     game.flags.noticedThorn = true;
     return describe(game, "The wolf's paw is swollen. A thorn is buried between the pads.");
@@ -286,6 +328,28 @@ function examine(game, room, target) {
     game.flags.foundBaron = true;
     game.player.experience += 1;
     return describe(game, "You find enough of the Baron's trail to satisfy the recovered big-house hint.");
+  }
+
+  if (room.id === 'service-corridor' && target === 'woman') {
+    game.flags.foundLostWoman = true;
+    game.player.experience += 1;
+    return describe(
+      game,
+      'You find the woman tucked behind a row of filing cabinets. She blinks at you, points at a game marker hidden in the partition wall, and slips out toward reception.'
+    );
+  }
+
+  if (target === 'self' || target === 'me' || target === game.player.name.toLowerCase()) {
+    const face = game.player.face || 'a featureless face';
+    return describe(
+      game,
+      `${game.player.name} (${game.player.gender}, ${face}). Strength ${game.player.strength}/${MAX_STRENGTH}, experience ${game.player.experience}.`
+    );
+  }
+
+  if (target === 'player' || target === 'character') {
+    const face = game.player.face || 'a featureless face';
+    return describe(game, `You see ${game.player.name}: ${face}.`);
   }
 
   const item = items[target];
@@ -375,9 +439,17 @@ function attack(game, room, target) {
 
 function sleep(game, room) {
   game.player.asleep = true;
-  const safety = room.safeSleep
-    ? 'This is one of the safer sleeping places preserved by the help pages.'
-    : 'You will eventually disappear from view, but visible carried objects can be taken first.';
+  const lockKey = room.lockableWith;
+  const lockedAndKeyed = lockKey && game.player.inventory.includes(lockKey);
+
+  let safety;
+  if (lockedAndKeyed) {
+    safety = `You lock the door with the ${lockKey} before bedding down. This is the safest sleep available — the recovered help warns that fairies will eventually respawn a duplicate key, so this safety lapses after a while.`;
+  } else if (room.safeSleep) {
+    safety = 'This is one of the safer sleeping places preserved by the help pages.';
+  } else {
+    safety = 'You will eventually disappear from view, but visible carried objects can be taken first.';
+  }
   return describe(game, `You fall asleep. ${safety}`);
 }
 
@@ -440,9 +512,17 @@ function castSpell(game, target) {
   if (!game.player.spells?.length) {
     return describe(game, 'You have not learned any spells yet.');
   }
+  const spell = game.player.spells[0];
+  const victim = commandName(target || 'another player');
+  if (spell === 'chocolate weapons') {
+    return describe(
+      game,
+      `You cast chocolate weapons at ${victim}. In the original multiplayer game this would turn the weapons they are holding into chocolate; the single-player reconstruction has nobody to target.`
+    );
+  }
   return describe(
     game,
-    `You cast ${game.player.spells[0]} at ${commandName(target || 'another player')}. This reconstruction records the spell system but not the original full effects.`
+    `You cast ${spell} at ${victim}. This reconstruction records the spell system but not the original full effects.`
   );
 }
 
