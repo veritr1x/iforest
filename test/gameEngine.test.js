@@ -300,6 +300,19 @@ describe('iForest reconstructed game engine', () => {
     assert.match(game.message, /made by the fairies/i);
   });
 
+  it('surfaces the canonical Forestown intro lore in the square description and lobby receptionist', () => {
+    const square = getRoom('forestown-square');
+    assert.match(square.description, /rumours of dragons, fairies and magical sandwiches/i);
+    assert.match(square.description, /fight and steal from each other/i);
+
+    let game = createGame({ name: 'Tourist', intro: true });
+    game = applyCommand(game, { verb: 'examine', target: 'receptionist' });
+    assert.match(game.message, /rumours of dragons, fairies and magical sandwiches/i);
+
+    const mountain = getRoom('mountain-pass');
+    assert.match(mountain.description, /still uncharted regions/i);
+  });
+
   it('assigns a deterministic face per name and respects gender selection', () => {
     const a = createGame({ name: 'Alice', gender: 'female' });
     const b = createGame({ name: 'Alice', gender: 'female' });

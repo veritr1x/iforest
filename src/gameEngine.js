@@ -316,7 +316,7 @@ function dropItem(game, room, target) {
 
 function examine(game, room, target) {
   if (room.id === 'forestown-reception' && target === 'receptionist') {
-    return describe(game, 'She watches with the patience of someone who has seen many tourists vanish into iForest. Her pen taps the form clipboard.');
+    return describe(game, 'She watches with the patience of someone who has seen many tourists vanish into iForest. "Rumours of dragons, fairies and magical sandwiches," she sighs. "That is what brings them in. Most never make it past the wolves." Her pen taps the form clipboard.');
   }
 
   if (room.id === 'forest-edge' && target === 'wolf') {
