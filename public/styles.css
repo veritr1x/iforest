@@ -529,7 +529,7 @@ button { cursor: pointer; }
   gap: 8px;
 }
 
-.map-detail h3 {
+.map-detail > h3 {
   margin: 6px 0 0;
   font-size: 0.95rem;
   text-transform: none;
