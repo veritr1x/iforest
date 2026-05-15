@@ -169,6 +169,13 @@ export function applyCommand(currentGame, command) {
   }
 
   if (verb === 'swap') {
+    if (game.player.location === 'giant-kitchen-cage' && target === 'giant') {
+      game.player.location = 'service-lift';
+      return describe(
+        game,
+        'You swap places with the giant. For a heartbeat he is rattling the bars of his own cage while you stand by the lift doors. You step inside before he understands.'
+      );
+    }
     return describe(game, 'You swap places in the old demonstration state. Whoosh.');
   }
 

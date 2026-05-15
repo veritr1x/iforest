@@ -107,6 +107,24 @@ describe('iForest reconstructed game engine', () => {
     assert.equal(game.player.location, 'forestown-mall');
   });
 
+  it('lets the player swap with the giant to escape the kitchen cage', () => {
+    let game = createGame({ name: 'Jack' });
+    game = applyCommand(game, { verb: 'south' });
+    game = applyCommand(game, { verb: 'east' });
+    game = applyCommand(game, { verb: 'north' });
+    assert.equal(game.player.location, 'service-lift');
+
+    game = applyCommand(game, { verb: 'use', target: 'lift' });
+    assert.equal(game.player.location, 'giant-kitchen-cage');
+
+    const stuck = applyCommand(game, { verb: 'swap', target: 'cage' });
+    assert.equal(stuck.player.location, 'giant-kitchen-cage');
+
+    game = applyCommand(game, { verb: 'swap', target: 'giant' });
+    assert.equal(game.player.location, 'service-lift');
+    assert.match(game.message, /swap places with the giant/i);
+  });
+
   it('keeps the recovered wooden house servlet room and its command vocabulary', () => {
     const house = getRoom('wooden-house');
 

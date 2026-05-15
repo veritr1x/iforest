@@ -2,6 +2,10 @@
 
 This folder contains the recovered evidence and a small Node/HTML recreation of the early-2000s WAP game iForest.
 
+## Play
+
+Play the static build in your browser: <https://veritr1x.github.io/iforest/>
+
 ## Evidence
 
 The archived material is under `evidence/wayback`:
