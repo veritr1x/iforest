@@ -291,6 +291,29 @@ describe('iForest reconstructed game engine', () => {
     assert.ok(game.view.systems.some((s) => /hospital/i.test(s)), 'hospital recovery in systems');
     assert.ok(game.view.systems.some((s) => /reception/i.test(s)), 'reception lobby in systems');
     assert.ok(game.view.systems.some((s) => /lots of players/i.test(s)), 'crowded-location overflow text in systems');
+    assert.ok(
+      game.view.systems.some((s) => /description-view/i.test(s) && /action-view/i.test(s) && /20/.test(s)),
+      'description/action view loop with 20-second refresh in systems'
+    );
+    assert.ok(
+      game.view.systems.some((s) => /S%/.test(s) && /fitness/i.test(s)),
+      'S% fitness-grown strength cap in systems'
+    );
+  });
+
+  it('shows the five-camera count and the picture-marked skill stones', () => {
+    let game = createGame({ name: 'Cartographer' });
+    game = { ...game, player: { ...game.player, location: 'ski-run-summit' } };
+    game = applyCommand(game, { verb: 'examine', target: 'camera' });
+    assert.match(game.message, /five cameras/i);
+
+    game = { ...game, player: { ...game.player, location: 'forest-pool', inventory: ['swim stone'] } };
+    game = applyCommand(game, { verb: 'examine', target: 'swim stone' });
+    assert.match(game.message, /water mark/i);
+
+    game = { ...game, player: { ...game.player, location: 'valley-house', inventory: ['climb stone'] } };
+    game = applyCommand(game, { verb: 'examine', target: 'climb stone' });
+    assert.match(game.message, /tree mark/i);
   });
 
   it('attributes the teleportation sandwich to the fairies', () => {

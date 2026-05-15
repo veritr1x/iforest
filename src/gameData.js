@@ -24,7 +24,9 @@ export const recoveredSystems = [
   'PvP combat using best held weapon and best held defence, with one carried item dropped per hit',
   'hospital + lost-property recovery loop when strength reaches zero',
   'reception lobby and lift entry preceding Forestown square',
-  'crowded-location overflow text ("lots of players are here") for postage-stamp screens'
+  'crowded-location overflow text ("lots of players are here") for postage-stamp screens',
+  'description-view followed by an OK-link action-view, both auto-refreshing every ~20 seconds',
+  'S% strength indicator showing a fraction of a fitness-grown cap; the 35-point starting cap rises as the player progresses'
 ];
 
 export const FACES = {
@@ -828,7 +830,7 @@ export const items = {
     id: 'fairy',
     name: 'fairy',
     description:
-      'A housekeeping character. The technical page says fairies are special characters who keep the world in order.',
+      'A housekeeping character. The technical page says fairies are special characters who keep the world in order. ifinfo4.wml adds that if a key gets lost, or a person becomes stuck in a tree, sooner or later the fairies will sort it out, and that they sometimes give skill stones to travellers.',
     portable: false
   },
   bot: {
