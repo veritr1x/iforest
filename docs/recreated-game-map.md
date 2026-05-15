@@ -96,3 +96,7 @@ flowchart TB
 The original Java source, XML location files, full world graph, exact combat formulas, exact spell effects, and complete post-mansion puzzle chain were not recovered. The current map is therefore a playable evidence-led reconstruction, not a claim that the original topology is complete.
 
 The 2003 `whattodo.htm` routes players "east… one location past the 'You are now leaving Forestown' sign, then south as far as you can, then east" to reach the tourist information booth. The reconstruction goes town → forest-edge → south → pool → south → info-clearing → east → info-booth. The original may have had an intermediate boundary room between Forestown and the forest edge that we have not recovered.
+
+`whattodo.htm` also says that if you sleep behind a locked door with the key, "after a while the fairies will put a duplicate key into the game, but you will be safe for a few hours." The reconstruction models the 8-command fairy housekeeping reset but does not yet simulate a separate timed duplicate-key respawn for locked-door safe sleep.
+
+`clipping.htm` describes the Palm OS PQA's "Info" button as also reading mail from a post office. We surface the PQA character-status form via `fun=aboutchar`, but the post-office room itself was not in any recovered location WML and is not in the current map.
