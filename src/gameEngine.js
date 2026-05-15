@@ -96,22 +96,21 @@ function describe(game, message = '') {
   };
 }
 
-export function createGame({ name = 'Tourist', gender = 'male', face = null, intro = false } = {}) {
+export function createGame({ name = 'Tourist', gender = 'male', face = null, login = false } = {}) {
   const safeName = String(name || 'Tourist').trim().slice(0, 12) || 'Tourist';
   const safeGender = gender === 'female' ? 'female' : 'male';
   const chosenFace = face && (FACES[safeGender] || []).includes(face)
     ? face
     : pickFace(safeName, safeGender);
-  const startLocation = intro ? 'forestown-reception' : 'forestown-square';
-  const welcome = intro
-    ? "The receptionist looks up, unimpressed. Sign the forms when you are ready to descend."
+  const welcome = login
+    ? "Recovered ifdisc.wml disclaimer: you need a name (what other players see) and a password — do not use a password you have used elsewhere, just make up something silly. Start playing drops you straight into Forestown."
     : 'Welcome to Forestown.';
   const game = {
     player: {
       name: safeName,
       gender: safeGender,
       face: chosenFace,
-      location: startLocation,
+      location: 'forestown-square',
       strength: MAX_STRENGTH,
       experience: 0,
       inventory: [],
@@ -194,17 +193,6 @@ export function applyCommand(currentGame, command) {
     return attack(game, room, target);
   }
 
-  if (verb === 'swap') {
-    if (game.player.location === 'giant-kitchen-cage' && target === 'giant') {
-      game.player.location = 'service-lift';
-      return describe(
-        game,
-        'You swap places with the giant. For a heartbeat he is rattling the bars of his own cage while you stand by the lift doors. You step inside before he understands.'
-      );
-    }
-    return describe(game, 'You swap places in the old demonstration state. Whoosh.');
-  }
-
   if (verb === 'wait') {
     return describe(game, 'The WAP screen refreshes, reporting anything that has changed nearby.');
   }
@@ -231,18 +219,6 @@ export function applyCommand(currentGame, command) {
 
   if (verb === 'cast') {
     return castSpell(game, target);
-  }
-
-  if (verb === 'sign') {
-    if (room.id !== 'forestown-reception') {
-      return describe(game, 'There is nothing to sign here.');
-    }
-    game.flags.introSigned = true;
-    game.player.location = 'forestown-square';
-    return describe(
-      game,
-      'You sign the forms on the dotted line and hurry into the lift. The receptionist watches you go. "Don\'t get lost!" she calls. The doors close, the lift descends, and they open again on Forestown Main Square.'
-    );
   }
 
   if (verb === 'stamp') {
@@ -315,10 +291,6 @@ function dropItem(game, room, target) {
 }
 
 function examine(game, room, target) {
-  if (room.id === 'forestown-reception' && target === 'receptionist') {
-    return describe(game, 'She watches with the patience of someone who has seen many tourists vanish into iForest. "Rumours of dragons, fairies and magical sandwiches," she sighs. "That is what brings them in. Most never make it past the wolves." Her pen taps the form clipboard.');
-  }
-
   if (room.id === 'forest-edge' && target === 'wolf') {
     game.flags.noticedThorn = true;
     return describe(game, "The wolf's paw is swollen. A thorn is buried between the pads.");
@@ -389,11 +361,6 @@ function useItem(game, room, target) {
     }
     game.flags.gateOpened = true;
     return describe(game, 'The Baronial crest flashes. The gate opens just enough to slip through.');
-  }
-
-  if (target === 'lift' && room.id === 'service-lift') {
-    game.player.location = 'giant-kitchen-cage';
-    return describe(game, 'You press the button. The lift descends rapidly, the doors open, and the lift disappears.');
   }
 
   if (target === 'marker key') {

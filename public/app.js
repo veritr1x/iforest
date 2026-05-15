@@ -127,7 +127,7 @@ async function startGame(name) {
     sessionId = payload.id;
     currentGame = payload.game;
   } else {
-    currentGame = staticEngine.createGame({ name, intro: true });
+    currentGame = staticEngine.createGame({ name, login: true });
     sessionId = 'local';
     persistState();
   }

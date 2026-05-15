@@ -4,14 +4,10 @@ This map reflects the current reconstructed Node game in `src/gameData.js`. Soli
 
 ```mermaid
 flowchart TB
-  lobby["Forestown Reception\nreceptionist, forms, lift, frames"]
   town["Forestown Main Square\nitems: sandwich, map\nsleeping players"]
   customer["Customer Services\nmarker, lost tourist"]
   mall["Forestown Mall\nsandwich, coat, refreshments, clothing"]
-  reception["Reception\nlocked door, receptionist"]
-  lift["Lift\nlevel code"]
-  corridor["Service Corridor\nlost tourist"]
-  cage["Cage in Giant Kitchen\ngiant, cage"]
+  corridor["Service Corridor\nlost woman"]
   lost["Lost Property Loop\nitem: coat"]
   hospital["Forestown Hospital\nfairy"]
 
@@ -27,23 +23,18 @@ flowchart TB
   northpath["Northern Path\nbot"]
   gate["Beside Gate\ngate"]
   mansion["Mansion Grounds\nguard"]
-  mansionReception["Mansion Reception\nlocked door, receptionist"]
+  mansionReception["Inside the Mansion"]
   cellars["Wine Cellars\nlocked door"]
-  house["Inside House\nold woman\nsafer sleep"]
 
   mountain["Mountain Pass\ncamera, marker"]
   caves["Cave Tunnels\ngoblin, troll, dragon, sword"]
   summit["Ski-Run Summit\ncamera, marker"]
   valley["Valley House\nclimb stone, sandwich, valley key\nsafer sleep"]
 
-  lobby -. "sign forms, ride the lift" .-> town
   town <-- "south / north" --> customer
   customer -. "west locked until hand stamped" .-> mall
   mall -->|east| customer
-  customer <-- "east / south" --> reception
-  reception -->|north| lift
-  lift -. "use lift" .-> cage
-  reception <-- "east / west" --> corridor
+  customer <-- "east / west" --> corridor
   lost <-- "east / west" --> town
   hospital -->|north| town
   hospital -->|west| lost
@@ -67,13 +58,11 @@ flowchart TB
   mansion -->|west| gate
   mansion <-- "north / south" --> mansionReception
   mansionReception <-- "east / west" --> cellars
-  mansionReception <-- "north / south" --> house
   mansion <-- "east / west" --> mountain
 
   mountain <-- "north / south" --> caves
   mountain <-- "south / north" --> summit
   mountain <-- "east / west" --> valley
-  valley <-- "north / south" --> house
 ```
 
 ## Implemented Evidence Details
@@ -86,14 +75,15 @@ flowchart TB
 - **Magic:** reading a spellbook grants a permanent spell. The recovered evidence proves spellbooks and permanent spells, but not the exact spell list.
 - **Sleeping:** sleep is modeled everywhere; Valley House and the recovered wooden house are treated as safer sleeping places because the help pages describe locked/safe rooms.
 - **Hospital/lost property:** when strength falls to zero (recovered from `ifinfo3.wml`), the fairies carry the player to Forestown Hospital and carried items move to the Lost Property loop, which can be revisited via `west` to recover them.
-- **Reception lobby:** the WAP `other/intro.wml` and `intro2.wml` captures describe a reception scene with a sceptical receptionist, framed past adventurers, forms to sign, and a lift down to the game. `createGame({ intro: true })` (used by the playable build) opens here; `sign` rides the lift to Forestown Main Square.
+- **Login disclaimer:** the recovered `ifdisc.wml` capture tells the player they need a name (visible to other players) and a password (do not reuse a real one), then a Start playing link to `/servlets/mfr`. `createGame({ login: true })` surfaces that disclaimer text and spawns the player straight into Forestown Main Square.
 - **PvP combat note:** `ifinfo2.wml` describes auto-pick of the best held weapon and best held defence, dropping one carried item per hit. The single-player reconstruction surfaces this as flavor on `attack` rather than simulating other players.
 - **Fairy housekeeping:** every eighth command resets the XML-like location documents, replacing taken objects and clearing dropped clutter.
-- **Recovered servlet states:** the gate, reception, lift, wooden house, and giant-kitchen cage use recovered WML/HTML room text where available. The cage's exact place in the larger graph is still unknown.
 
 ## Still Unknown
 
 The original Java source, XML location files, full world graph, exact combat formulas, exact spell effects, and complete post-mansion puzzle chain were not recovered. The current map is therefore a playable evidence-led reconstruction, not a claim that the original topology is complete.
+
+An earlier version of this reconstruction wired in a reception lobby with a sceptical receptionist, a service-corridor lift to a giant's kitchen cage, a wooden house with an old woman in a rocking chair, and a `swap` verb to switch places between two characters. Those came from servlet captures of the **UseEverything** demo (`servlets/DriverHTML`, `servlets/Driver?code=beanstalk`, `Driver?c1=Peter&c2=Jane&c=swap`) and the WAP `other/intro.wml` / `intro2.wml` pages, which belong to UseEverything's two-character single-player game, not to iForest. Those captures have been relocated to `evidence/wayback/raw/useeverything/` and the corresponding rooms, the `swap` verb, the `sign` lift entry, and the receptionist-in-lobby flavor have been removed. iForest's actual entry is the `ifdisc.wml` disclaimer page linking to `/servlets/mfr` for login; the original Forestown map past that login point remains incompletely recovered.
 
 The 2003 `whattodo.htm` routes players "east… one location past the 'You are now leaving Forestown' sign, then south as far as you can, then east" to reach the tourist information booth. The reconstruction goes town → forest-edge → south → pool → south → info-clearing → east → info-booth. The original may have had an intermediate boundary room between Forestown and the forest edge that we have not recovered.
 

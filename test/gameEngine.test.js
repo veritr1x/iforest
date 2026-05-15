@@ -107,41 +107,16 @@ describe('iForest reconstructed game engine', () => {
     assert.equal(game.player.location, 'forestown-mall');
   });
 
-  it('lets the player swap with the giant to escape the kitchen cage', () => {
+  it('drops the misattributed UseEverything rooms and the swap verb', () => {
+    assert.throws(() => getRoom('forestown-reception'));
+    assert.throws(() => getRoom('customer-services-reception'));
+    assert.throws(() => getRoom('service-lift'));
+    assert.throws(() => getRoom('giant-kitchen-cage'));
+    assert.throws(() => getRoom('wooden-house'));
+
     let game = createGame({ name: 'Jack' });
-    game = applyCommand(game, { verb: 'south' });
-    game = applyCommand(game, { verb: 'east' });
-    game = applyCommand(game, { verb: 'north' });
-    assert.equal(game.player.location, 'service-lift');
-
-    game = applyCommand(game, { verb: 'use', target: 'lift' });
-    assert.equal(game.player.location, 'giant-kitchen-cage');
-
-    const stuck = applyCommand(game, { verb: 'swap', target: 'cage' });
-    assert.equal(stuck.player.location, 'giant-kitchen-cage');
-
     game = applyCommand(game, { verb: 'swap', target: 'giant' });
-    assert.equal(game.player.location, 'service-lift');
-    assert.match(game.message, /swap places with the giant/i);
-  });
-
-  it('keeps the recovered wooden house servlet room and its command vocabulary', () => {
-    const house = getRoom('wooden-house');
-
-    assert.match(house.description, /small wooden house/i);
-    assert.deepEqual(house.nouns, ['woman']);
-    assert.deepEqual(house.commands, [
-      'south',
-      'take',
-      'use',
-      'attack',
-      'examine',
-      'inventory',
-      'swap',
-      'sleep',
-      'wait'
-    ]);
-    assert.match(house.evidence[0].file, /DriverHTML/);
+    assert.match(game.message, /do not know that verb/i);
   });
 
   it('models pocket limits, teleportation sandwiches, and fairy reset behavior', () => {
@@ -242,23 +217,11 @@ describe('iForest reconstructed game engine', () => {
     assert.match(game.message, /duplicate key/i);
   });
 
-  it('opens at the reception lobby when intro is requested and signs into Forestown via the lift', () => {
-    let game = createGame({ name: 'Newbie', intro: true });
-    assert.equal(game.player.location, 'forestown-reception');
-    assert.ok(game.view.commands.includes('sign'));
-    assert.ok(game.view.nouns.includes('receptionist'));
-    assert.ok(game.view.nouns.includes('lift'));
-
-    const peeked = applyCommand(game, { verb: 'examine', target: 'receptionist' });
-    assert.match(peeked.message, /seen many tourists/i);
-
-    const framed = applyCommand(game, { verb: 'examine', target: 'frames' });
-    assert.match(framed.message, /proud, fit, and annoyingly confident/i);
-
-    game = applyCommand(game, { verb: 'sign' });
+  it('surfaces the recovered ifdisc.wml login disclaimer and drops the player into Forestown', () => {
+    const game = createGame({ name: 'Newbie', login: true });
     assert.equal(game.player.location, 'forestown-square');
-    assert.match(game.message, /lift descends/i);
-    assert.equal(game.flags.introSigned, true);
+    assert.match(game.message, /ifdisc/i);
+    assert.match(game.message, /do not use a password you have used elsewhere/i);
   });
 
   it('routes a knocked-out player to the hospital with carried items in lost property', () => {
@@ -285,11 +248,11 @@ describe('iForest reconstructed game engine', () => {
     assert.ok(game.player.inventory.includes('map'));
   });
 
-  it('documents PvP combat, hospital recovery, and the reception lobby in recovered systems', () => {
+  it('documents PvP combat, hospital recovery, and the ifdisc login flow in recovered systems', () => {
     const game = createGame({ name: 'Lorehunter' });
     assert.ok(game.view.systems.some((s) => /PvP/i.test(s)), 'PvP combat in systems');
     assert.ok(game.view.systems.some((s) => /hospital/i.test(s)), 'hospital recovery in systems');
-    assert.ok(game.view.systems.some((s) => /reception/i.test(s)), 'reception lobby in systems');
+    assert.ok(game.view.systems.some((s) => /ifdisc/i.test(s) && /Forestown/i.test(s)), 'ifdisc login flow in systems');
     assert.ok(game.view.systems.some((s) => /lots of players/i.test(s)), 'crowded-location overflow text in systems');
     assert.ok(
       game.view.systems.some((s) => /description-view/i.test(s) && /action-view/i.test(s) && /20/.test(s)),
@@ -323,14 +286,10 @@ describe('iForest reconstructed game engine', () => {
     assert.match(game.message, /made by the fairies/i);
   });
 
-  it('surfaces the canonical Forestown intro lore in the square description and lobby receptionist', () => {
+  it('surfaces the canonical Forestown intro lore in the square description', () => {
     const square = getRoom('forestown-square');
     assert.match(square.description, /rumours of dragons, fairies and magical sandwiches/i);
     assert.match(square.description, /fight and steal from each other/i);
-
-    let game = createGame({ name: 'Tourist', intro: true });
-    game = applyCommand(game, { verb: 'examine', target: 'receptionist' });
-    assert.match(game.message, /rumours of dragons, fairies and magical sandwiches/i);
 
     const mountain = getRoom('mountain-pass');
     assert.match(mountain.description, /still uncharted regions/i);

@@ -4,10 +4,9 @@ export const HOUSEKEEPING_RESET_INTERVAL = 8;
 
 export const evidenceSources = [
   'http://web.archive.org/web/20020813224124id_/http://wap.useeverything.com/if.wml',
+  'http://web.archive.org/web/20031010104537id_/http://wap.useeverything.com:80/other/ifdisc.wml',
   'http://web.archive.org/web/20030812102021id_/http://useeverything.com:80/servlets/Intro1',
   'http://web.archive.org/web/20041109051542id_/http://useeverything.com:80/servlets/mfr',
-  'http://web.archive.org/web/20021008010511id_/http://useeverything.com:80/servlets/DriverHTML',
-  'http://web.archive.org/web/20030816043841id_/http://useeverything.com:80/servlets/Driver?code=beanstalk&c=swap',
   'http://web.archive.org/web/20030623201949id_/http://useeverything.com:80/iforest/index.htm',
   'http://web.archive.org/web/20020605185512id_/http://useeverything.com:80/iforest/news.htm',
   'http://web.archive.org/web/20020605185056id_/http://useeverything.com:80/iforest/instructions.htm',
@@ -27,7 +26,7 @@ export const recoveredSystems = [
   'character face selection (~20 per gender) shown by examine player',
   'PvP combat using best held weapon and best held defence, with one carried item dropped per hit',
   'hospital + lost-property recovery loop when strength reaches zero',
-  'reception lobby and lift entry preceding Forestown square',
+  'WAP entry flow: ifdisc.wml disclaimer ("name and a password... do not use a password you have used elsewhere") then a Start playing link to /servlets/mfr that drops the player straight into Forestown',
   'crowded-location overflow text ("lots of players are here") for postage-stamp screens',
   'description-view followed by an OK-link action-view, both auto-refreshing every ~20 seconds',
   'S% strength indicator showing a fraction of a fitness-grown cap; the 35-point starting cap rises as the player progresses',
@@ -55,25 +54,6 @@ export const FACES = {
 };
 
 export const rooms = {
-  'forestown-reception': {
-    id: 'forestown-reception',
-    title: 'Forestown Reception',
-    description:
-      "You stand in a reception lobby. The receptionist peers at you from behind a big desk, obviously not impressed. The walls are covered with framed images of past adventurers, all proud, fit, and annoyingly confident. By contrast, you have come straight from the real world without the right adventuring clothes, tools, or even a compass. A clipboard of forms waits beside a small lift.",
-    exits: {},
-    commands: ['sign', 'examine', 'inventory', 'wait'],
-    nouns: ['receptionist', 'forms', 'lift', 'frames'],
-    evidence: [
-      {
-        file: 'evidence/wayback/raw/wap/20030815012928_wap.useeverything.com_other_intro.wml.wml',
-        note: 'Recovered intro WAP page: sceptical receptionist, framed adventurers, no compass or kit.'
-      },
-      {
-        file: 'evidence/wayback/raw/wap/20040710193404_wap.useeverything.com_other_intro2.wml.wml',
-        note: 'Sign on the dotted line, hurry into the lift, receptionist calls "Don\'t get lost!".'
-      }
-    ]
-  },
   'forestown-square': {
     id: 'forestown-square',
     title: 'Forestown Main Square',
@@ -117,7 +97,7 @@ export const rooms = {
       "Forestown's virtual customer-services system is reachable from the tourist information clearing. It is not much help, but a lost visitor and a claimable marker are somewhere inside.",
     exits: {
       north: 'forestown-square',
-      east: 'customer-services-reception',
+      east: 'service-corridor',
       west: 'forestown-mall'
     },
     blockedExits: {
@@ -155,70 +135,19 @@ export const rooms = {
       }
     ]
   },
-  'customer-services-reception': {
-    id: 'customer-services-reception',
-    title: 'Reception',
-    description:
-      "You are at reception. There's not a lot here, except for a big desk in the centre of the room. The room continues to the east, and there's a door to the west. The exit to the street is to the south. You can go: north, south, east.",
-    exits: {
-      north: 'service-lift',
-      south: 'customer-services',
-      east: 'service-corridor'
-    },
-    commands: ['north', 'south', 'east', 'take', 'use', 'attack', 'examine', 'inventory', 'swap'],
-    nouns: ['door', 'receptionist'],
-    evidence: [
-      {
-        file: 'evidence/wayback/raw/servlet/20040723095203_useeverything.com_servlets_Driver_c_s_amp.wml',
-        note: 'Recovered servlet state with reception, locked door, receptionist, and command list.'
-      }
-    ]
-  },
   'service-corridor': {
     id: 'service-corridor',
     title: 'Service Corridor',
     description:
       'The corridor bends through unhelpful signs, hold music, and locked office doors. Somewhere among the partitions, a woman is wandering, unable to find her way back out.',
     exits: {
-      west: 'customer-services-reception'
+      west: 'customer-services'
     },
     nouns: ['woman'],
     evidence: [
       {
         file: 'evidence/wayback/raw/html/20100127030221_useeverything.com_iforest_news.htm.html',
         note: '2010 news log: a lost woman is somewhere inside Customer Services; finding her reveals a marker to claim.'
-      }
-    ]
-  },
-  'service-lift': {
-    id: 'service-lift',
-    title: 'Lift',
-    description:
-      'A lift waits with two choices: use lift or exit lift. A small panel asks for a level code before it will descend.',
-    exits: {
-      south: 'customer-services-reception'
-    },
-    commands: ['use', 'examine', 'inventory', 'swap', 'south'],
-    nouns: ['lift', 'level code'],
-    evidence: [
-      {
-        file: 'evidence/wayback/raw/servlet/20040722203211_useeverything.com_servlets_Driver_c1_c1_amp.wml',
-        note: 'Recovered lift state with level-code prompt.'
-      }
-    ]
-  },
-  'giant-kitchen-cage': {
-    id: 'giant-kitchen-cage',
-    title: 'Cage in Giant Kitchen',
-    description:
-      "You are in a cage. It's just big enough to move around, but not much bigger. Outside the cage is an enormous kitchen, and you can see what looks to be a giant fussing around with knives and other utensils. You can go: nowhere.",
-    exits: {},
-    commands: ['use', 'attack', 'examine', 'inventory', 'swap', 'wait'],
-    nouns: ['giant', 'cage'],
-    evidence: [
-      {
-        file: 'evidence/wayback/raw/servlet/20040624153435_useeverything.com_servlets_Driver_code_beanstalk_amp.wml',
-        note: 'Recovered servlet state; placement in the larger iForest graph is unknown.'
       }
     ]
   },
@@ -494,12 +423,8 @@ export const rooms = {
           "The gate is closed. The recovered help says you need the old church, the top of the waterfall, and the Baron's seal."
       }
     },
-    commands: ['south', 'east', 'look', 'take', 'use', 'attack', 'examine', 'inventory', 'swap', 'sleep', 'wait'],
+    commands: ['south', 'east', 'look', 'take', 'use', 'attack', 'examine', 'inventory', 'sleep', 'wait'],
     evidence: [
-      {
-        file: 'evidence/wayback/raw/servlet/20070604111151_useeverything.com_servlets_Driver_state_z2C2x.RcBMXpmnPyvuL4PULw7llWiHNhMYW_c_COM_n1_NOUN_n2_N2_c1_C_c2_C.wml',
-        note: 'Recovered WML gate state.'
-      },
       {
         file: 'evidence/wayback/raw/html/20020718091746_useeverything.com_iforest_mansionhelp.htm.html',
         note: "Baron's mansion, guards, wall, and seal requirement."
@@ -528,23 +453,18 @@ export const rooms = {
   },
   'mansion-reception': {
     id: 'mansion-reception',
-    title: 'Mansion Reception',
+    title: 'Inside the Mansion',
     description:
-      'The mansion is quiet enough to feel abandoned. A locked door blocks one side of the reception room, while passages run toward the kitchen and the rooms above.',
+      'You step inside the mansion. The locals say none of them have been in for years, and the place feels quietly abandoned. The recovered hint is that the important task here is to explore all the rooms, including the wine cellars underneath the kitchen.',
     exits: {
       south: 'mansion-grounds',
-      east: 'wine-cellars',
-      north: 'wooden-house'
+      east: 'wine-cellars'
     },
-    nouns: ['door', 'receptionist'],
+    nouns: [],
     evidence: [
       {
         file: 'evidence/wayback/raw/html/20020718091746_useeverything.com_iforest_mansionhelp.htm.html',
         note: 'Inside the mansion, the important task is to explore all rooms and the wine cellars.'
-      },
-      {
-        file: 'evidence/wayback/raw/servlet/20040730171002_useeverything.com_servlets_Driver_state_Ai-Sqhr1zfp4BdbIX_amp.wml',
-        note: 'Recovered reception state with locked door and receptionist; exact placement is inferred.'
       }
     ]
   },
@@ -561,28 +481,6 @@ export const rooms = {
       {
         file: 'evidence/wayback/raw/html/20020718091746_useeverything.com_iforest_mansionhelp.htm.html',
         note: 'Wine cellars under the kitchen are rumoured to be extensive.'
-      }
-    ]
-  },
-  'wooden-house': {
-    id: 'wooden-house',
-    title: 'Inside House',
-    description:
-      "You are inside a small wooden house. There's only one room, and hardly any furniture. There is a rocking chair next to one of the windows, with an old woman rocking slowly in it. I think she's asleep. You can go: south.",
-    exits: {
-      south: 'mansion-reception'
-    },
-    commands: ['south', 'take', 'use', 'attack', 'examine', 'inventory', 'swap', 'sleep', 'wait'],
-    nouns: ['woman'],
-    safeSleep: true,
-    evidence: [
-      {
-        file: 'evidence/wayback/raw/servlet/20021008010511_useeverything.com_servlets_DriverHTML.wml',
-        note: 'Recovered web demonstration form with exact room text, command select, and woman noun.'
-      },
-      {
-        file: 'evidence/wayback/raw/servlet/20030816043841_useeverything.com_servlets_Driver_code_beanstalk_c_swap.wml',
-        note: 'Recovered WML house state after swap.'
       }
     ]
   },
@@ -658,8 +556,7 @@ export const rooms = {
     description:
       "East of the mountains is a sparse valley with a pleasant climate. A neat abandoned house contains useful objects, an underground passage, and one of the safer places to sleep if you have the key.",
     exits: {
-      west: 'mountain-pass',
-      north: 'wooden-house'
+      west: 'mountain-pass'
     },
     nouns: ['climb stone', 'sandwich', 'valley key'],
     image:
@@ -793,7 +690,7 @@ export const items = {
   woman: {
     id: 'woman',
     name: 'woman',
-    description: 'An old woman asleep in a rocking chair.',
+    description: "A lost visitor wandering inside Forestown's customer-services corridor.",
     portable: false
   },
   camera: {
@@ -858,54 +755,6 @@ export const items = {
     id: 'lost tourist',
     name: 'lost tourist',
     description: "Someone rumoured to be lost in Forestown's customer-services system.",
-    portable: false
-  },
-  door: {
-    id: 'door',
-    name: 'locked door',
-    description: 'A locked door from the recovered reception state.',
-    portable: false
-  },
-  receptionist: {
-    id: 'receptionist',
-    name: 'receptionist',
-    description: 'An iForest staff member behind a reception desk.',
-    portable: false
-  },
-  forms: {
-    id: 'forms',
-    name: 'forms',
-    description: 'A standard adventuring waiver. The receptionist taps her pen pointedly until you sign.',
-    portable: false
-  },
-  frames: {
-    id: 'frames',
-    name: 'framed adventurers',
-    description: 'Past adventurers in the framed photographs all look proud, fit, and annoyingly confident.',
-    portable: false
-  },
-  lift: {
-    id: 'lift',
-    name: 'lift',
-    description: 'A lift with a level-code prompt.',
-    portable: false
-  },
-  'level code': {
-    id: 'level code',
-    name: 'level code',
-    description: 'A code field shown by the recovered lift state.',
-    portable: false
-  },
-  giant: {
-    id: 'giant',
-    name: 'giant',
-    description: 'A giant fussing around with knives and other utensils outside a cage.',
-    portable: false
-  },
-  cage: {
-    id: 'cage',
-    name: 'cage',
-    description: 'A cage just big enough to move around in.',
     portable: false
   },
   'baron trace': {
