@@ -520,6 +520,7 @@ function renderMapDetail(view, roomId) {
   back.type = 'button';
   back.className = 'map-back';
   back.textContent = '< Map';
+  back.setAttribute('aria-label', 'Back to map');
   back.addEventListener('click', () => {
     currentGame.mapDetailRoomId = null;
     renderPanel('map');
