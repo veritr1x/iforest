@@ -33,6 +33,9 @@ const ZERO_ARITY = new Set([
 const INVENTORY_ONLY = new Set(['drop', 'cast', 'read']);
 const STORAGE_KEY = 'iforest:state';
 
+import { computeMapLayout } from './mapLayout.js';
+import { rooms as roomData } from './engine/gameData.js';
+
 let sessionId = null;
 let currentGame = null;
 let armedVerb = null;
@@ -122,6 +125,7 @@ async function startGame(name) {
     sessionId = 'local';
     persistState();
   }
+  initMapState();
   setArmed(null);
   render();
 }
@@ -139,6 +143,10 @@ async function runCommand(verb, target = '') {
     currentGame = staticEngine.applyCommand(currentGame, { verb, target });
     persistState();
   }
+  if (currentGame?.view?.room?.id) {
+    if (!currentGame.visitedRooms) currentGame.visitedRooms = new Set();
+    currentGame.visitedRooms.add(currentGame.view.room.id);
+  }
   setArmed(null);
   render();
   if (activePanel) renderPanel(activePanel);
@@ -148,7 +156,11 @@ async function runCommand(verb, target = '') {
 function persistState() {
   if (serverMode) return;
   try {
-    sessionStorage.setItem(STORAGE_KEY, JSON.stringify(currentGame));
+    const snapshot = {
+      ...currentGame,
+      visitedRooms: currentGame.visitedRooms ? [...currentGame.visitedRooms] : []
+    };
+    sessionStorage.setItem(STORAGE_KEY, JSON.stringify(snapshot));
   } catch (_) {
     // storage unavailable
   }
@@ -159,12 +171,23 @@ function restoreState() {
   try {
     const raw = sessionStorage.getItem(STORAGE_KEY);
     if (!raw) return false;
-    currentGame = JSON.parse(raw);
+    const parsed = JSON.parse(raw);
+    currentGame = parsed;
+    currentGame.visitedRooms = new Set(parsed.visitedRooms || [currentGame.player.location]);
+    currentGame.mapLayout = computeMapLayout(roomData, currentGame.player.location);
+    currentGame.mapDetailRoomId = null;
     sessionId = 'local';
     return true;
   } catch (_) {
     return false;
   }
+}
+
+function initMapState() {
+  if (!currentGame) return;
+  currentGame.visitedRooms = new Set([currentGame.player.location]);
+  currentGame.mapLayout = computeMapLayout(roomData, currentGame.player.location);
+  currentGame.mapDetailRoomId = null;
 }
 
 function render() {

@@ -56,6 +56,12 @@ export function createServer() {
         return sendJson(response, { game });
       }
 
+      if (request.method === 'GET' && url.pathname === '/engine/gameData.js') {
+        return serveStaticFile(join(projectRoot, 'src', 'gameData.js'), response);
+      }
+      if (request.method === 'GET' && url.pathname === '/engine/gameEngine.js') {
+        return serveStaticFile(join(projectRoot, 'src', 'gameEngine.js'), response);
+      }
       return serveStatic(url.pathname, response);
     } catch (error) {
       console.error(error);
@@ -93,6 +99,18 @@ function serveStatic(pathname, response) {
     return;
   }
 
+  response.writeHead(200, {
+    'content-type': mimeTypes[extname(filePath)] || 'application/octet-stream'
+  });
+  createReadStream(filePath).pipe(response);
+}
+
+function serveStaticFile(filePath, response) {
+  if (!existsSync(filePath) || !statSync(filePath).isFile()) {
+    response.writeHead(404, { 'content-type': 'text/plain; charset=utf-8' });
+    response.end('Not found');
+    return;
+  }
   response.writeHead(200, {
     'content-type': mimeTypes[extname(filePath)] || 'application/octet-stream'
   });
