@@ -68,7 +68,7 @@ export const rooms = {
     id: 'forestown-square',
     title: 'Forestown Main Square',
     description:
-      'You are in Forestown, a crowded settlement behind protective walls. The main street leads north and south, public buildings stand to either side, and the eastern edge of town opens toward the woods. A pile of sleeping players has gathered near the start.',
+      'You are in Forestown, a once-peaceful settlement behind protective walls. Rumours of dragons, fairies and magical sandwiches have drawn adventurers from around the world, and now the place is crowded with tourists who fight and steal from each other, and annoy the wolves in the forest. The main street leads north and south, public buildings stand to either side, and the eastern edge of town opens toward the woods. A pile of sleeping players has gathered near the start.',
     exits: {
       north: 'northern-path',
       south: 'customer-services',
@@ -580,7 +580,7 @@ export const rooms = {
     id: 'mountain-pass',
     title: 'Mountain Pass',
     description:
-      'The path climbs into colder air. Tunnels cut into the mountain, the snow deepens, and signs point toward a ski-run, game marker, and text camera near the summit.',
+      'The path climbs into colder air. Tunnels cut into the mountain, the snow deepens, and signs point toward a ski-run, game marker, and text camera near the summit. Beyond, the still uncharted regions promise more than most visitors ever stray to find.',
     exits: {
       west: 'mansion-grounds',
       north: 'cave-tunnels',
