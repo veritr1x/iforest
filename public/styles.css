@@ -489,7 +489,7 @@ button { cursor: pointer; }
 }
 
 .map-room { cursor: pointer; outline: none; }
-.map-room:focus rect { stroke: var(--warn); stroke-width: 1.75; }
+.map-room:focus-visible rect { stroke: var(--warn); stroke-width: 1.75; }
 
 .map-connector {
   stroke: var(--ink);

@@ -51,6 +51,22 @@ describe('computeMapLayout', () => {
     for (const id of reachable) assert.ok(positions.has(id), `missing ${id}`);
   });
 
+  it('bumps a colliding room one extra step in its arrival direction', () => {
+    // A.east → B at (1,0); A.south → C at (0,1).
+    // B.south → D lands at (1,1).
+    // C.east → E would also target (1,1); it must bump east to (2,1).
+    const fixture = {
+      A: { id: 'A', exits: { east: 'B', south: 'C' } },
+      B: { id: 'B', exits: { south: 'D' } },
+      C: { id: 'C', exits: { east: 'E' } },
+      D: { id: 'D', exits: {} },
+      E: { id: 'E', exits: {} }
+    };
+    const { positions } = computeMapLayout(fixture, 'A');
+    assert.deepEqual(positions.get('D'), { x: 1, y: 1 });
+    assert.deepEqual(positions.get('E'), { x: 2, y: 1 });
+  });
+
   it('returns bounds that cover every placed room', () => {
     const { positions, bounds } = computeMapLayout(rooms, 'forestown-square');
     let minX = Infinity, maxX = -Infinity, minY = Infinity, maxY = -Infinity;

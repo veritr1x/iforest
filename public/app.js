@@ -174,8 +174,9 @@ async function runCommand(verb, target = '') {
 function persistState() {
   if (serverMode) return;
   try {
+    const { mapLayout: _mapLayout, ...rest } = currentGame;
     const snapshot = {
-      ...currentGame,
+      ...rest,
       visitedRooms: currentGame.visitedRooms ? [...currentGame.visitedRooms] : []
     };
     sessionStorage.setItem(STORAGE_KEY, JSON.stringify(snapshot));
