@@ -335,16 +335,17 @@ function renderPanel(name) {
     return;
   }
 
-  if (name === 'systems') {
-    el.sheetTitle.textContent = 'Recovered Systems';
-    el.sheetBody.append(sectionList('Architecture', view.systems || []));
+  if (name === 'map') {
+    el.sheetTitle.textContent = 'Map';
+    renderMap(view);
     return;
   }
+}
 
-  if (name === 'evidence') {
-    el.sheetTitle.textContent = 'Evidence';
-    el.sheetBody.append(sectionLinks('For this room', view.room.evidence || []));
-  }
+function renderMap(view) {
+  const placeholder = document.createElement('p');
+  placeholder.textContent = `You are in ${view.room.title}.`;
+  el.sheetBody.append(placeholder);
 }
 
 function sectionList(title, values) {
