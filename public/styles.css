@@ -90,11 +90,25 @@ button { cursor: pointer; }
   color: #a8a39a;
 }
 
-.chrome-bar .signal {
-  letter-spacing: 0;
+.chrome-bar .repo-link {
+  display: inline-flex;
+  align-items: center;
   color: var(--key-glow);
-  font-weight: 700;
+  text-decoration: none;
   line-height: 1;
+  padding: 2px;
+  border-radius: 2px;
+}
+
+.chrome-bar .repo-link:hover,
+.chrome-bar .repo-link:focus-visible {
+  color: #ffe89a;
+  outline: 1px solid var(--key-glow);
+  outline-offset: 1px;
+}
+
+.chrome-bar .repo-link svg {
+  display: block;
 }
 
 .chrome-bar .bar-title {
