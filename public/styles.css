@@ -290,7 +290,7 @@ button { cursor: pointer; }
 /* Tab bar */
 .tab-bar {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(3, 1fr);
   background: var(--bezel);
   border-top: 2px solid #000;
 }
@@ -458,3 +458,100 @@ button { cursor: pointer; }
   background: transparent;
   color: var(--key-text);
 }
+
+/* Map panel */
+.map-svg {
+  display: block;
+  margin: 0 auto;
+  max-width: 100%;
+  height: auto;
+  font-family: inherit;
+}
+
+.map-room rect {
+  fill: var(--lcd-shade);
+  stroke: var(--ink);
+  stroke-width: 1.25;
+}
+
+.map-room text {
+  fill: var(--ink);
+  font-size: 9px;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  pointer-events: none;
+}
+
+.map-room.is-current rect {
+  fill: var(--key-glow);
+  stroke: var(--ink);
+  stroke-width: 1.5;
+}
+
+.map-room { cursor: pointer; outline: none; }
+.map-room:focus rect { stroke: var(--warn); stroke-width: 1.75; }
+
+.map-connector {
+  stroke: var(--ink);
+  stroke-width: 1.25;
+  fill: none;
+}
+
+.map-stub {
+  stroke: var(--ink-dim);
+  stroke-width: 1.25;
+  stroke-dasharray: 2 3;
+  fill: none;
+}
+
+.map-connector.is-blocked,
+.map-stub.is-blocked {
+  stroke: var(--warn);
+  stroke-dasharray: 3 3;
+}
+
+.map-pulse {
+  fill: var(--warn);
+  animation: map-pulse 1.4s ease-in-out infinite;
+  transform-origin: center;
+  transform-box: fill-box;
+}
+
+@keyframes map-pulse {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50%      { opacity: 0.35; transform: scale(1.6); }
+}
+
+/* Room detail card */
+.map-detail {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.map-detail h3 {
+  margin: 6px 0 0;
+  font-size: 0.95rem;
+  text-transform: none;
+  letter-spacing: 0;
+  color: var(--ink);
+}
+
+.map-detail p {
+  margin: 0;
+  font-size: 0.88rem;
+  line-height: 1.5;
+}
+
+.map-back {
+  align-self: flex-start;
+  background: transparent;
+  color: var(--ink);
+  border: 1px solid var(--ink);
+  padding: 4px 10px;
+  font-size: 0.78rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.map-back:hover { background: var(--lcd-shade); }
