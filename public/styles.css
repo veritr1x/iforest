@@ -91,9 +91,10 @@ button { cursor: pointer; }
 }
 
 .chrome-bar .signal {
-  letter-spacing: 0.2em;
+  letter-spacing: 0;
   color: var(--key-glow);
   font-weight: 700;
+  line-height: 1;
 }
 
 .chrome-bar .bar-title {
