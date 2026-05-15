@@ -35,7 +35,7 @@ export function createServer() {
       if (request.method === 'POST' && url.pathname === '/api/new') {
         const body = await readJson(request);
         const id = randomUUID();
-        const game = createGame({ name: body.name });
+        const game = createGame({ name: body.name, intro: true });
         sessions.set(id, game);
         return sendJson(response, { id, game });
       }
