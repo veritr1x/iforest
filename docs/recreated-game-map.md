@@ -4,6 +4,7 @@ This map reflects the current reconstructed Node game in `src/gameData.js`. Soli
 
 ```mermaid
 flowchart TB
+  lobby["Forestown Reception\nreceptionist, forms, lift, frames"]
   town["Forestown Main Square\nitems: sandwich, map\nsleeping players"]
   customer["Customer Services\nmarker, lost tourist"]
   mall["Forestown Mall\nsandwich, coat, refreshments, clothing"]
@@ -35,6 +36,7 @@ flowchart TB
   summit["Ski-Run Summit\ncamera, marker"]
   valley["Valley House\nclimb stone, sandwich, valley key\nsafer sleep"]
 
+  lobby -. "sign forms, ride the lift" .-> town
   town <-- "south / north" --> customer
   customer -. "west locked until hand stamped" .-> mall
   mall -->|east| customer
@@ -83,7 +85,9 @@ flowchart TB
 - **Markers:** marker keys can claim fixed game markers. The claim is tracked per room.
 - **Magic:** reading a spellbook grants a permanent spell. The recovered evidence proves spellbooks and permanent spells, but not the exact spell list.
 - **Sleeping:** sleep is modeled everywhere; Valley House and the recovered wooden house are treated as safer sleeping places because the help pages describe locked/safe rooms.
-- **Hospital/lost property:** dangerous combat can send the player to hospital and move carried objects to Lost Property.
+- **Hospital/lost property:** when strength falls to zero (recovered from `ifinfo3.wml`), the fairies carry the player to Forestown Hospital and carried items move to the Lost Property loop, which can be revisited via `west` to recover them.
+- **Reception lobby:** the WAP `other/intro.wml` and `intro2.wml` captures describe a reception scene with a sceptical receptionist, framed past adventurers, forms to sign, and a lift down to the game. `createGame({ intro: true })` (used by the playable build) opens here; `sign` rides the lift to Forestown Main Square.
+- **PvP combat note:** `ifinfo2.wml` describes auto-pick of the best held weapon and best held defence, dropping one carried item per hit. The single-player reconstruction surfaces this as flavor on `attack` rather than simulating other players.
 - **Fairy housekeeping:** every eighth command resets the XML-like location documents, replacing taken objects and clearing dropped clutter.
 - **Recovered servlet states:** the gate, reception, lift, wooden house, and giant-kitchen cage use recovered WML/HTML room text where available. The cage's exact place in the larger graph is still unknown.
 
