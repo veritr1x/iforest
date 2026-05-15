@@ -203,4 +203,114 @@ describe('iForest reconstructed game engine', () => {
     assert.match(game.message, /safer sleeping/i);
   });
 
+  it('hides the customer-services marker until the lost woman is found', () => {
+    let game = createGame({ name: 'Detective' });
+    game = { ...game, player: { ...game.player, location: 'service-corridor' } };
+
+    assert.ok(!game.view.nouns.includes('marker'), 'marker should not be visible before finding the woman');
+
+    game = applyCommand(game, { verb: 'examine', target: 'woman' });
+    assert.equal(game.flags.foundLostWoman, true);
+    assert.match(game.message, /filing cabinets/i);
+    assert.ok(game.view.nouns.includes('marker'), 'marker becomes visible after finding the woman');
+  });
+
+  it('reflavors the chocolate-weapons spell as a debuff cast on other players', () => {
+    let game = createGame({ name: 'Caster' });
+    game = {
+      ...game,
+      player: { ...game.player, spells: ['chocolate weapons'] }
+    };
+    game = applyCommand(game, { verb: 'cast', target: 'rival' });
+    assert.match(game.message, /turn the weapons they are holding into chocolate/i);
+    assert.match(game.message, /single-player reconstruction/i);
+  });
+
+  it('treats valley-house sleep as safest when the valley key is held', () => {
+    let game = createGame({ name: 'Sleeper' });
+    game = {
+      ...game,
+      player: {
+        ...game.player,
+        location: 'valley-house',
+        inventory: ['valley key']
+      }
+    };
+    game = applyCommand(game, { verb: 'sleep' });
+    assert.equal(game.player.asleep, true);
+    assert.match(game.message, /safest sleep available/i);
+    assert.match(game.message, /duplicate key/i);
+  });
+
+  it('opens at the reception lobby when intro is requested and signs into Forestown via the lift', () => {
+    let game = createGame({ name: 'Newbie', intro: true });
+    assert.equal(game.player.location, 'forestown-reception');
+    assert.ok(game.view.commands.includes('sign'));
+    assert.ok(game.view.nouns.includes('receptionist'));
+    assert.ok(game.view.nouns.includes('lift'));
+
+    const peeked = applyCommand(game, { verb: 'examine', target: 'receptionist' });
+    assert.match(peeked.message, /seen many tourists/i);
+
+    const framed = applyCommand(game, { verb: 'examine', target: 'frames' });
+    assert.match(framed.message, /proud, fit, and annoyingly confident/i);
+
+    game = applyCommand(game, { verb: 'sign' });
+    assert.equal(game.player.location, 'forestown-square');
+    assert.match(game.message, /lift descends/i);
+    assert.equal(game.flags.introSigned, true);
+  });
+
+  it('routes a knocked-out player to the hospital with carried items in lost property', () => {
+    let game = createGame({ name: 'Hapless' });
+    game = {
+      ...game,
+      player: {
+        ...game.player,
+        location: 'forest-edge',
+        strength: 5,
+        inventory: ['map']
+      }
+    };
+
+    game = applyCommand(game, { verb: 'attack', target: 'wolf' });
+    assert.equal(game.player.location, 'hospital');
+    assert.equal(game.player.inventory.length, 0);
+    assert.match(game.message, /hospital/i);
+    assert.ok(game.world.itemLocations['lost-property'].includes('map'));
+
+    game = applyCommand(game, { verb: 'west' });
+    assert.equal(game.player.location, 'lost-property');
+    game = applyCommand(game, { verb: 'take', target: 'map' });
+    assert.ok(game.player.inventory.includes('map'));
+  });
+
+  it('documents PvP combat, hospital recovery, and the reception lobby in recovered systems', () => {
+    const game = createGame({ name: 'Lorehunter' });
+    assert.ok(game.view.systems.some((s) => /PvP/i.test(s)), 'PvP combat in systems');
+    assert.ok(game.view.systems.some((s) => /hospital/i.test(s)), 'hospital recovery in systems');
+    assert.ok(game.view.systems.some((s) => /reception/i.test(s)), 'reception lobby in systems');
+  });
+
+  it('attributes the teleportation sandwich to the fairies', () => {
+    let game = createGame({ name: 'Foodie' });
+    game = applyCommand(game, { verb: 'take', target: 'sandwich' });
+    game = applyCommand(game, { verb: 'examine', target: 'sandwich' });
+    assert.match(game.message, /made by the fairies/i);
+  });
+
+  it('assigns a deterministic face per name and respects gender selection', () => {
+    const a = createGame({ name: 'Alice', gender: 'female' });
+    const b = createGame({ name: 'Alice', gender: 'female' });
+    assert.equal(a.player.face, b.player.face, 'same name + gender yields same face');
+    assert.equal(a.player.gender, 'female');
+
+    const m = createGame({ name: 'Alice', gender: 'male' });
+    assert.equal(m.player.gender, 'male');
+    assert.ok(typeof m.player.face === 'string' && m.player.face.length > 0);
+
+    const looked = applyCommand(a, { verb: 'examine', target: 'self' });
+    assert.match(looked.message, new RegExp(a.player.face));
+  });
+
 });
