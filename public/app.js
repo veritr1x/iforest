@@ -1,3 +1,6 @@
+import { computeMapLayout } from './mapLayout.js';
+import { rooms as roomData } from './engine/gameData.js';
+
 const DIRECTIONS = ['north', 'south', 'east', 'west'];
 const DIRECTION_LABEL = { north: 'N', south: 'S', east: 'E', west: 'W' };
 const VERB_ORDER = [
@@ -32,9 +35,6 @@ const ZERO_ARITY = new Set([
 ]);
 const INVENTORY_ONLY = new Set(['drop', 'cast', 'read']);
 const STORAGE_KEY = 'iforest:state';
-
-import { computeMapLayout } from './mapLayout.js';
-import { rooms as roomData } from './engine/gameData.js';
 
 let sessionId = null;
 let currentGame = null;
@@ -131,6 +131,12 @@ async function startGame(name) {
 }
 
 async function runCommand(verb, target = '') {
+  const prevVisited = currentGame?.visitedRooms instanceof Set
+    ? currentGame.visitedRooms
+    : new Set();
+  const prevLayout = currentGame?.mapLayout;
+  const prevDetailRoomId = currentGame?.mapDetailRoomId ?? null;
+
   if (serverMode) {
     const response = await fetch('api/command', {
       method: 'POST',
@@ -141,12 +147,18 @@ async function runCommand(verb, target = '') {
     currentGame = payload.game;
   } else {
     currentGame = staticEngine.applyCommand(currentGame, { verb, target });
-    persistState();
   }
+
+  currentGame.visitedRooms = prevVisited;
+  currentGame.mapLayout = prevLayout
+    ?? computeMapLayout(roomData, currentGame.player.location);
+  currentGame.mapDetailRoomId = prevDetailRoomId;
+
   if (currentGame?.view?.room?.id) {
-    if (!currentGame.visitedRooms) currentGame.visitedRooms = new Set();
     currentGame.visitedRooms.add(currentGame.view.room.id);
   }
+
+  if (!serverMode) persistState();
   setArmed(null);
   render();
   if (activePanel) renderPanel(activePanel);
