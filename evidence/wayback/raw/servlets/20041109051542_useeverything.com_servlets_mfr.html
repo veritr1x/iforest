@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<!DOCTYPE wml PUBLIC "-//WAPFORUM//DTD WML 1.1//EN" "http://www.wapforum.org/DTD/wml_1.1.xml">
+<wml>
+<card id="login" title="Login">
+<onevent type="prev"><go href="#quit"/></onevent>
+<do type="accept" label="LOGIN"><go href="http://useeverything.com/servlets/mfr?new=false&amp;uid=$(uid)&amp;pwd=$(pwd)"/></do>
+<do type="options" label="EXIT"><go href="#quit"/></do>
+<p>Please enter a name and password.</p><p>Name: <input name="uid" emptyok="false" format="MM*M" maxlength="12"/></p>
+<p>Password: <input name="pwd" emptyok="false" format="MMMM*M" maxlength="12"/></p>
+<p><a title="NEW" href="http://useeverything.com/servlets/mfr?new=true&amp;uid=$(uid)&amp;pwd=$(pwd)">Create an account</a></p>
+<p><a title="LOGIN" href="http://useeverything.com/servlets/mfr?new=false&amp;uid=$(uid)&amp;pwd=$(pwd)">Log me back in</a></p>
+<p><a title="HOME" href="http://wap.littlescreen.co.uk/index.wml">Back home</a></p>
+</card>
+<card id="quit" title="Confirm">
+<p>Do you really want to exit?</p>
+<p><a title="Yes" href="http://wap.useeverything.com/index.wml">Yes</a><br/>
+<anchor title="No"><prev/>No</anchor></p>
+</card></wml>

@@ -6,7 +6,11 @@ export const evidenceSources = [
   'http://web.archive.org/web/20020813224124id_/http://wap.useeverything.com/if.wml',
   'http://web.archive.org/web/20030812102021id_/http://useeverything.com:80/servlets/Intro1',
   'http://web.archive.org/web/20041109051542id_/http://useeverything.com:80/servlets/mfr',
+  'http://web.archive.org/web/20021008010511id_/http://useeverything.com:80/servlets/DriverHTML',
+  'http://web.archive.org/web/20030816043841id_/http://useeverything.com:80/servlets/Driver?code=beanstalk&c=swap',
   'http://web.archive.org/web/20030623201949id_/http://useeverything.com:80/iforest/index.htm',
+  'http://web.archive.org/web/20020605185512id_/http://useeverything.com:80/iforest/news.htm',
+  'http://web.archive.org/web/20020605185056id_/http://useeverything.com:80/iforest/instructions.htm',
   'https://web.archive.org/web/20020213120859id_/http://littlescreen.co.uk:80/tech2.htm',
   'https://web.archive.org/web/20020826043411id_/http://useeverything.com:80/tech2.htm',
   'https://web.archive.org/cdx/?url=http://wap.useeverything.com/*&output=json'
@@ -26,7 +30,11 @@ export const recoveredSystems = [
   'reception lobby and lift entry preceding Forestown square',
   'crowded-location overflow text ("lots of players are here") for postage-stamp screens',
   'description-view followed by an OK-link action-view, both auto-refreshing every ~20 seconds',
-  'S% strength indicator showing a fraction of a fitness-grown cap; the 35-point starting cap rises as the player progresses'
+  'S% strength indicator showing a fraction of a fitness-grown cap; the 35-point starting cap rises as the player progresses',
+  'social-action menu reached via "More..." after clicking another player\'s name, with preset friendlies like "Say hello" and "Smile"',
+  'server-side accounts via /servlets/mfr with uid (3+ letters) and pwd (5+ chars), where the Driver URL state token is the session id',
+  'WAPJAG online WAP browser gateway for playing iForest through a normal web browser',
+  'site routing where iForest is the multiplayer branch and Vampire Country and UseEverything are the single-player siblings'
 ];
 
 export const FACES = {

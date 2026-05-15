@@ -100,3 +100,11 @@ The 2003 `whattodo.htm` routes players "east… one location past the 'You are n
 `whattodo.htm` also says that if you sleep behind a locked door with the key, "after a while the fairies will put a duplicate key into the game, but you will be safe for a few hours." The reconstruction models the 8-command fairy housekeeping reset but does not yet simulate a separate timed duplicate-key respawn for locked-door safe sleep.
 
 `clipping.htm` describes the Palm OS PQA's "Info" button as also reading mail from a post office. We surface the PQA character-status form via `fun=aboutchar`, but the post-office room itself was not in any recovered location WML and is not in the current map.
+
+The `/servlets/mfr` capture shows that the original game required a real account: a uid of 3+ letters and a password of 5+ characters, with `new=true|false` toggling signup vs. login. The `state=…` token in every `/servlets/Driver` URL was a server-side session id. The reconstruction is single-player and stores no accounts, so login, password recovery, and multi-session presence are not modelled.
+
+The 2001 `news.htm` changelog confirms a social-action menu reached by selecting "More..." after clicking another player's name, with preset friendlies like "Say hello" and "Smile" added in June 2001. The reconstruction is single-player, so the social menu surfaces only as flavor in `recoveredSystems` — the exact action list, animations, and response semantics were not recovered.
+
+`news.htm` also lists the WAPJAG online WAP browser as a way to play iForest through a regular web page in August 2001. The `DriverHTML` servlet capture confirms an HTML-rendered driver existed. We do not have the WAPJAG gateway state, and the relationship between `DriverHTML` and the WAPJAG-hosted experience is not fully recovered.
+
+The `/servlets/Intro1` WAP page splits the games into a multiplayer branch (iForest, at `wap.useeverything.com/other/if.wml`) and two single-player siblings (Vampire Country and UseEverything). The single-player siblings have separate WML trees and are out of scope for this reconstruction.

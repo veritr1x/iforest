@@ -350,4 +350,26 @@ describe('iForest reconstructed game engine', () => {
     assert.match(looked.message, new RegExp(a.player.face));
   });
 
+  it('documents the social-action menu, account system, WAPJAG gateway, and sibling-game routing', () => {
+    const game = createGame({ name: 'Archivist' });
+    assert.ok(
+      game.view.systems.some((s) => /More\.\.\./.test(s) && /Say hello/i.test(s)),
+      'social-action menu in systems'
+    );
+    assert.ok(
+      game.view.systems.some((s) => /mfr/.test(s) && /uid/i.test(s) && /pwd/i.test(s)),
+      'mfr account system in systems'
+    );
+    assert.ok(
+      game.view.systems.some((s) => /WAPJAG/i.test(s)),
+      'WAPJAG gateway in systems'
+    );
+    assert.ok(
+      game.view.systems.some(
+        (s) => /multiplayer/i.test(s) && /Vampire Country/i.test(s) && /UseEverything/i.test(s)
+      ),
+      'iForest multi vs Vampire/UseEverything single-player routing in systems'
+    );
+  });
+
 });
