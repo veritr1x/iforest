@@ -4,7 +4,7 @@ import { randomUUID } from 'node:crypto';
 import { extname, join, normalize, resolve } from 'node:path';
 import { fileURLToPath, pathToFileURL } from 'node:url';
 
-import { applyCommand, createGame, getEvidenceSummary } from './gameEngine.js';
+import { applyCommand, createGame } from './gameEngine.js';
 
 const projectRoot = resolve(fileURLToPath(new URL('..', import.meta.url)));
 const publicRoot = join(projectRoot, 'public');
@@ -28,8 +28,8 @@ export function createServer() {
     try {
       const url = new URL(request.url, 'http://localhost');
 
-      if (request.method === 'GET' && url.pathname === '/api/evidence') {
-        return sendJson(response, getEvidenceSummary());
+      if (request.method === 'GET' && url.pathname === '/api/health') {
+        return sendJson(response, { ok: true });
       }
 
       if (request.method === 'POST' && url.pathname === '/api/new') {

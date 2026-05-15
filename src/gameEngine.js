@@ -1,9 +1,4 @@
-import { existsSync, readdirSync } from 'node:fs';
-import { dirname, join } from 'node:path';
-import { fileURLToPath } from 'node:url';
-
 import {
-  evidenceSources,
   HOUSEKEEPING_RESET_INTERVAL,
   items,
   MAX_POCKETS,
@@ -14,8 +9,6 @@ import {
 
 const DIRECTIONS = new Set(['north', 'south', 'east', 'west']);
 const GLOBAL_COMMANDS = ['look', 'inventory', 'sleep', 'wait'];
-const __dirname = dirname(fileURLToPath(import.meta.url));
-const projectRoot = dirname(__dirname);
 
 function clone(value) {
   return JSON.parse(JSON.stringify(value));
@@ -482,36 +475,4 @@ function bestHeldItem(game, field) {
 
 function commandName(target) {
   return target || 'that';
-}
-
-function countFiles(directory) {
-  if (!existsSync(directory)) {
-    return 0;
-  }
-
-  return readdirSync(directory, { withFileTypes: true }).reduce((count, entry) => {
-    const path = join(directory, entry.name);
-    return count + (entry.isDirectory() ? countFiles(path) : 1);
-  }, 0);
-}
-
-export function getEvidenceSummary() {
-  const rawRoot = join(projectRoot, 'evidence', 'wayback', 'raw');
-  const categories = {
-    contact: countFiles(join(rawRoot, 'contact')),
-    html: countFiles(join(rawRoot, 'html')),
-    htmlExpanded: countFiles(join(rawRoot, 'html-expanded')),
-    littlescreen: countFiles(join(rawRoot, 'littlescreen')),
-    servlet: countFiles(join(rawRoot, 'servlet')),
-    wap: countFiles(join(rawRoot, 'wap')),
-    wapExpanded: countFiles(join(rawRoot, 'wap-expanded')),
-    pqaDecompiled: countFiles(join(projectRoot, 'evidence', 'pqa-decompiled'))
-  };
-
-  return {
-    rawFiles: Object.values(categories).reduce((total, count) => total + count, 0),
-    categories,
-    sources: evidenceSources,
-    systems: recoveredSystems
-  };
 }

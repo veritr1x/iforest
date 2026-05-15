@@ -31,12 +31,14 @@ const ZERO_ARITY = new Set([
   'say hello'
 ]);
 const INVENTORY_ONLY = new Set(['drop', 'cast', 'read']);
+const STORAGE_KEY = 'iforest:state';
 
 let sessionId = null;
 let currentGame = null;
 let armedVerb = null;
 let activePanel = null;
-let evidenceSummary = null;
+let serverMode = false;
+let staticEngine = null;
 
 const el = {
   screen: document.querySelector('#screen'),
@@ -91,36 +93,78 @@ document.addEventListener('keydown', (event) => {
   }
 });
 
+async function detectMode() {
+  try {
+    const response = await fetch('/api/health', { cache: 'no-store' });
+    if (response.ok) {
+      serverMode = true;
+      return;
+    }
+  } catch (_) {
+    // fall through to static
+  }
+  serverMode = false;
+  staticEngine = await import('./engine/gameEngine.js');
+}
+
 async function startGame(name) {
-  const response = await fetch('/api/new', {
-    method: 'POST',
-    headers: { 'content-type': 'application/json' },
-    body: JSON.stringify({ name })
-  });
-  const payload = await response.json();
-  sessionId = payload.id;
-  currentGame = payload.game;
+  if (serverMode) {
+    const response = await fetch('/api/new', {
+      method: 'POST',
+      headers: { 'content-type': 'application/json' },
+      body: JSON.stringify({ name })
+    });
+    const payload = await response.json();
+    sessionId = payload.id;
+    currentGame = payload.game;
+  } else {
+    currentGame = staticEngine.createGame({ name });
+    sessionId = 'local';
+    persistState();
+  }
   setArmed(null);
   render();
 }
 
 async function runCommand(verb, target = '') {
-  const response = await fetch('/api/command', {
-    method: 'POST',
-    headers: { 'content-type': 'application/json' },
-    body: JSON.stringify({ id: sessionId, command: { verb, target } })
-  });
-  const payload = await response.json();
-  currentGame = payload.game;
+  if (serverMode) {
+    const response = await fetch('/api/command', {
+      method: 'POST',
+      headers: { 'content-type': 'application/json' },
+      body: JSON.stringify({ id: sessionId, command: { verb, target } })
+    });
+    const payload = await response.json();
+    currentGame = payload.game;
+  } else {
+    currentGame = staticEngine.applyCommand(currentGame, { verb, target });
+    persistState();
+  }
   setArmed(null);
   render();
   if (activePanel) renderPanel(activePanel);
   el.screen.scrollTop = 0;
 }
 
-async function loadEvidence() {
-  const response = await fetch('/api/evidence');
-  evidenceSummary = await response.json();
+function persistState() {
+  if (serverMode) return;
+  try {
+    sessionStorage.setItem(STORAGE_KEY, JSON.stringify(currentGame));
+  } catch (_) {
+    // storage unavailable
+  }
+}
+
+function restoreState() {
+  if (serverMode) return false;
+  try {
+    const raw = sessionStorage.getItem(STORAGE_KEY);
+    if (!raw) return false;
+    currentGame = JSON.parse(raw);
+    sessionId = 'local';
+    return true;
+  } catch (_) {
+    return false;
+  }
 }
 
 function render() {
@@ -299,15 +343,6 @@ function renderPanel(name) {
 
   if (name === 'evidence') {
     el.sheetTitle.textContent = 'Evidence';
-    if (evidenceSummary) {
-      const summary = document.createElement('p');
-      summary.className = 'summary-line';
-      const c = evidenceSummary.categories;
-      const wap = (c.wap || 0) + (c.wapExpanded || 0);
-      const desktop = (c.html || 0) + (c.htmlExpanded || 0) + (c.littlescreen || 0);
-      summary.textContent = `${evidenceSummary.rawFiles} archived files: ${wap} WAP, ${c.servlet || 0} servlet, ${desktop} desktop, ${c.contact || 0} tech/contact, ${c.pqaDecompiled || 0} PQA.`;
-      el.sheetBody.append(summary);
-    }
     el.sheetBody.append(sectionLinks('For this room', view.room.evidence || []));
   }
 }
@@ -356,5 +391,9 @@ function sectionLinks(title, entries) {
   return wrap;
 }
 
-await loadEvidence();
-await startGame('Jane');
+await detectMode();
+if (restoreState()) {
+  render();
+} else {
+  await startGame('Jane');
+}

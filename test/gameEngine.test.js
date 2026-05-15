@@ -4,7 +4,6 @@ import { describe, it } from 'node:test';
 import {
   applyCommand,
   createGame,
-  getEvidenceSummary,
   getRoom,
   listCommands
 } from '../src/gameEngine.js';
@@ -181,16 +180,4 @@ describe('iForest reconstructed game engine', () => {
     assert.match(game.message, /safer sleeping/i);
   });
 
-  it('reports the archived evidence available to the app', () => {
-    const summary = getEvidenceSummary();
-
-    assert.ok(summary.rawFiles >= 140);
-    assert.ok(summary.categories.wap >= 25);
-    assert.ok(summary.categories.wapExpanded >= 13);
-    assert.ok(summary.categories.html >= 30);
-    assert.ok(summary.categories.littlescreen >= 33);
-    assert.ok(summary.categories.contact >= 8);
-    assert.ok(summary.systems.some((source) => source.includes('Java servlet')));
-    assert.ok(summary.sources.some((source) => source.includes('tech2.htm')));
-  });
 });
