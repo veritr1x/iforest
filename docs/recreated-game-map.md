@@ -94,3 +94,5 @@ flowchart TB
 ## Still Unknown
 
 The original Java source, XML location files, full world graph, exact combat formulas, exact spell effects, and complete post-mansion puzzle chain were not recovered. The current map is therefore a playable evidence-led reconstruction, not a claim that the original topology is complete.
+
+The 2003 `whattodo.htm` routes players "east… one location past the 'You are now leaving Forestown' sign, then south as far as you can, then east" to reach the tourist information booth. The reconstruction goes town → forest-edge → south → pool → south → info-clearing → east → info-booth. The original may have had an intermediate boundary room between Forestown and the forest edge that we have not recovered.
