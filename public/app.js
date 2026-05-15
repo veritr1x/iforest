@@ -505,9 +505,38 @@ function renderMapGrid(view) {
   el.sheetBody.append(svg);
 }
 
-function renderMapDetail(_view, _roomId) {
-  // Replaced in Task 7
-  renderMapGrid(_view);
+function renderMapDetail(view, roomId) {
+  const room = roomData[roomId];
+  if (!room) {
+    currentGame.mapDetailRoomId = null;
+    renderMapGrid(view);
+    return;
+  }
+
+  const wrap = document.createElement('div');
+  wrap.className = 'map-detail';
+
+  const back = document.createElement('button');
+  back.type = 'button';
+  back.className = 'map-back';
+  back.textContent = '< Map';
+  back.addEventListener('click', () => {
+    currentGame.mapDetailRoomId = null;
+    renderPanel('map');
+  });
+  wrap.append(back);
+
+  const heading = document.createElement('h3');
+  heading.textContent = room.title;
+  wrap.append(heading);
+
+  const description = document.createElement('p');
+  description.textContent = room.description;
+  wrap.append(description);
+
+  wrap.append(sectionLinks('Evidence', room.evidence || []));
+
+  el.sheetBody.append(wrap);
 }
 
 function shortLabel(title) {
