@@ -507,12 +507,11 @@ function renderMapGrid(view) {
 
 function renderMapDetail(_view, _roomId) {
   // Replaced in Task 7
-  currentGame.mapDetailRoomId = null;
   renderMapGrid(_view);
 }
 
 function shortLabel(title) {
-  return title.length <= 12 ? title : title.slice(0, 11) + '…';
+  return title.length <= 11 ? title : title.slice(0, 11) + '…';
 }
 
 function isBlocked(roomId, dir) {
