@@ -36,6 +36,12 @@ const ZERO_ARITY = new Set([
 const INVENTORY_ONLY = new Set(['drop', 'cast', 'read']);
 const STORAGE_KEY = 'iforest:state';
 
+const MAP_CELL_W = 52;
+const MAP_CELL_H = 34;
+const MAP_GAP = 14;
+const MAP_PAD = 18;
+const MAP_NS = 'http://www.w3.org/2000/svg';
+
 let sessionId = null;
 let currentGame = null;
 let armedVerb = null;
@@ -378,9 +384,148 @@ function renderPanel(name) {
 }
 
 function renderMap(view) {
-  const placeholder = document.createElement('p');
-  placeholder.textContent = `You are in ${view.room.title}.`;
-  el.sheetBody.append(placeholder);
+  if (currentGame.mapDetailRoomId) {
+    renderMapDetail(view, currentGame.mapDetailRoomId);
+    return;
+  }
+  renderMapGrid(view);
+}
+
+function renderMapGrid(view) {
+  const layout = currentGame.mapLayout;
+  const visited = currentGame.visitedRooms || new Set();
+  const stepX = MAP_CELL_W + MAP_GAP;
+  const stepY = MAP_CELL_H + MAP_GAP;
+  const cols = layout.bounds.maxX - layout.bounds.minX + 1;
+  const rows = layout.bounds.maxY - layout.bounds.minY + 1;
+  const width = cols * stepX - MAP_GAP + MAP_PAD * 2;
+  const height = rows * stepY - MAP_GAP + MAP_PAD * 2;
+
+  const svg = document.createElementNS(MAP_NS, 'svg');
+  svg.setAttribute('class', 'map-svg');
+  svg.setAttribute('viewBox', `0 0 ${width} ${height}`);
+  svg.setAttribute('width', String(width));
+  svg.setAttribute('height', String(height));
+
+  const cellCenter = (pos) => ({
+    cx: MAP_PAD + (pos.x - layout.bounds.minX) * stepX + MAP_CELL_W / 2,
+    cy: MAP_PAD + (pos.y - layout.bounds.minY) * stepY + MAP_CELL_H / 2
+  });
+
+  // 1. Connectors between two visited rooms
+  for (const [id, pos] of layout.positions) {
+    if (!visited.has(id)) continue;
+    const exits = roomData[id]?.exits || {};
+    for (const [dir, nextId] of Object.entries(exits)) {
+      if (!visited.has(nextId)) continue;
+      if (id > nextId) continue; // draw each edge once
+      const nextPos = layout.positions.get(nextId);
+      if (!nextPos) continue;
+      const a = cellCenter(pos);
+      const b = cellCenter(nextPos);
+      const line = document.createElementNS(MAP_NS, 'line');
+      line.setAttribute('x1', String(a.cx));
+      line.setAttribute('y1', String(a.cy));
+      line.setAttribute('x2', String(b.cx));
+      line.setAttribute('y2', String(b.cy));
+      line.setAttribute('class', 'map-connector');
+      if (isBlocked(id, dir)) line.classList.add('is-blocked');
+      svg.append(line);
+    }
+  }
+
+  // 2. Stubs from visited rooms toward unvisited neighbors
+  for (const [id, pos] of layout.positions) {
+    if (!visited.has(id)) continue;
+    const exits = roomData[id]?.exits || {};
+    for (const [dir, nextId] of Object.entries(exits)) {
+      if (visited.has(nextId)) continue;
+      const delta = { north: [0, -1], south: [0, 1], east: [1, 0], west: [-1, 0] }[dir];
+      if (!delta) continue;
+      const a = cellCenter(pos);
+      const stubLen = MAP_GAP / 2;
+      const line = document.createElementNS(MAP_NS, 'line');
+      line.setAttribute('x1', String(a.cx));
+      line.setAttribute('y1', String(a.cy));
+      line.setAttribute('x2', String(a.cx + delta[0] * (MAP_CELL_W / 2 + stubLen)));
+      line.setAttribute('y2', String(a.cy + delta[1] * (MAP_CELL_H / 2 + stubLen)));
+      line.setAttribute('class', 'map-stub');
+      if (isBlocked(id, dir)) line.classList.add('is-blocked');
+      svg.append(line);
+    }
+  }
+
+  // 3. Rooms (visited only — fog of war hides everything else)
+  for (const [id, pos] of layout.positions) {
+    if (!visited.has(id)) continue;
+    const room = roomData[id];
+    const x = MAP_PAD + (pos.x - layout.bounds.minX) * stepX;
+    const y = MAP_PAD + (pos.y - layout.bounds.minY) * stepY;
+    const g = document.createElementNS(MAP_NS, 'g');
+    g.setAttribute('class', 'map-room');
+    g.setAttribute('tabindex', '0');
+    g.setAttribute('role', 'button');
+    g.setAttribute('aria-label', room.title);
+    if (id === view.room.id) g.classList.add('is-current');
+    g.addEventListener('click', () => openRoomDetail(id));
+    g.addEventListener('keydown', (event) => {
+      if (event.key === 'Enter' || event.key === ' ') {
+        event.preventDefault();
+        openRoomDetail(id);
+      }
+    });
+
+    const rect = document.createElementNS(MAP_NS, 'rect');
+    rect.setAttribute('x', String(x));
+    rect.setAttribute('y', String(y));
+    rect.setAttribute('width', String(MAP_CELL_W));
+    rect.setAttribute('height', String(MAP_CELL_H));
+    rect.setAttribute('rx', '3');
+    g.append(rect);
+
+    const label = document.createElementNS(MAP_NS, 'text');
+    label.setAttribute('x', String(x + MAP_CELL_W / 2));
+    label.setAttribute('y', String(y + MAP_CELL_H / 2 + 3));
+    label.setAttribute('text-anchor', 'middle');
+    label.textContent = shortLabel(room.title);
+    g.append(label);
+
+    if (id === view.room.id) {
+      const dot = document.createElementNS(MAP_NS, 'circle');
+      dot.setAttribute('cx', String(x + MAP_CELL_W - 6));
+      dot.setAttribute('cy', String(y + 6));
+      dot.setAttribute('r', '3');
+      dot.setAttribute('class', 'map-pulse');
+      g.append(dot);
+    }
+
+    svg.append(g);
+  }
+
+  el.sheetBody.append(svg);
+}
+
+function renderMapDetail(_view, _roomId) {
+  // Replaced in Task 7
+  currentGame.mapDetailRoomId = null;
+  renderMapGrid(_view);
+}
+
+function shortLabel(title) {
+  return title.length <= 12 ? title : title.slice(0, 11) + '…';
+}
+
+function isBlocked(roomId, dir) {
+  const blocked = roomData[roomId]?.blockedExits?.[dir];
+  if (!blocked) return false;
+  const flag = blocked.unlessFlag;
+  if (!flag) return true;
+  return !currentGame.flags?.[flag];
+}
+
+function openRoomDetail(roomId) {
+  currentGame.mapDetailRoomId = roomId;
+  renderPanel('map');
 }
 
 function sectionList(title, values) {
