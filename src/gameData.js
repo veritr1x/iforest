@@ -19,10 +19,50 @@ export const recoveredSystems = [
   'sleeping-player visibility window',
   'bots with dull names that do not attack',
   'live text cameras and 24-hour game markers',
-  'Palm PQA character-status form using fun=aboutchar'
+  'Palm PQA character-status form using fun=aboutchar',
+  'character face selection (~20 per gender) shown by examine player',
+  'PvP combat using best held weapon and best held defence, with one carried item dropped per hit',
+  'hospital + lost-property recovery loop when strength reaches zero',
+  'reception lobby and lift entry preceding Forestown square'
 ];
 
+export const FACES = {
+  male: [
+    'bearded ranger', 'clean-shaven scholar', 'grizzled sailor', 'pale poet',
+    'tanned hiker', 'silver-haired elder', 'freckled apprentice', 'stern guard',
+    'cheerful baker', 'tired clerk', 'sun-burnt farmer', 'sharp-eyed scout',
+    'shaven monk', 'wild-haired wizard', 'soot-streaked smith', 'masked traveller',
+    'curly-haired bard', 'one-eyed pirate', 'gentle healer', 'frowning miner'
+  ],
+  female: [
+    'red-haired ranger', 'silver-braided scholar', 'sun-browned sailor', 'pale poet',
+    'short-haired hiker', 'silver-haired elder', 'freckled apprentice', 'stern guard',
+    'cheerful baker', 'tired clerk', 'wind-burnt farmer', 'sharp-eyed scout',
+    'shaven priestess', 'wild-haired witch', 'soot-streaked smith', 'masked traveller',
+    'curly-haired bard', 'one-eyed pirate', 'gentle healer', 'frowning miner'
+  ]
+};
+
 export const rooms = {
+  'forestown-reception': {
+    id: 'forestown-reception',
+    title: 'Forestown Reception',
+    description:
+      "You stand in a reception lobby. The receptionist peers at you from behind a big desk, obviously not impressed. The walls are covered with framed images of past adventurers, all proud, fit, and annoyingly confident. By contrast, you have come straight from the real world without the right adventuring clothes, tools, or even a compass. A clipboard of forms waits beside a small lift.",
+    exits: {},
+    commands: ['sign', 'examine', 'inventory', 'wait'],
+    nouns: ['receptionist', 'forms', 'lift', 'frames'],
+    evidence: [
+      {
+        file: 'evidence/wayback/raw/wap/20030815012928_wap.useeverything.com_other_intro.wml.wml',
+        note: 'Recovered intro WAP page: sceptical receptionist, framed adventurers, no compass or kit.'
+      },
+      {
+        file: 'evidence/wayback/raw/wap/20040710193404_wap.useeverything.com_other_intro2.wml.wml',
+        note: 'Sign on the dotted line, hurry into the lift, receptionist calls "Don\'t get lost!".'
+      }
+    ]
+  },
   'forestown-square': {
     id: 'forestown-square',
     title: 'Forestown Main Square',
@@ -127,15 +167,15 @@ export const rooms = {
     id: 'service-corridor',
     title: 'Service Corridor',
     description:
-      'The corridor bends through unhelpful signs, hold music, and locked office doors. It is a reconstruction placeholder for the unrecovered Customer Services maze.',
+      'The corridor bends through unhelpful signs, hold music, and locked office doors. Somewhere among the partitions, a woman is wandering, unable to find her way back out.',
     exits: {
       west: 'customer-services-reception'
     },
-    nouns: ['lost tourist'],
+    nouns: ['woman'],
     evidence: [
       {
-        file: 'evidence/wayback/raw/html/20020605185512_useeverything.com_iforest_news.htm.html',
-        note: 'Only the lost-person objective is recovered; the room graph is not.'
+        file: 'evidence/wayback/raw/html/20100127030221_useeverything.com_iforest_news.htm.html',
+        note: '2010 news log: a lost woman is somewhere inside Customer Services; finding her reveals a marker to claim.'
       }
     ]
   },
@@ -221,7 +261,7 @@ export const rooms = {
       south: 'forest-pool',
       east: 'derelict-church'
     },
-    nouns: ['wolf', 'stick', 'tourist'],
+    nouns: ['wolf', 'stick', 'tourist', 'stream'],
     image:
       'evidence/wayback/raw/html/20060106093348_useeverything.com_iforest_images_wolfcrop.jpg.jpg',
     evidence: [
@@ -230,12 +270,16 @@ export const rooms = {
         note: 'Forest, wolves, thorn puzzle, fairies, church, pool, waterfall, and tourist information.'
       },
       {
+        file: 'evidence/wayback/raw/html/20080516203125_useeverything.com_iforest_foresthelp.htm.html',
+        note: '2008 forest help: church entry is discouraged by Forestown management; fairies unlock the northern path after the thorn.'
+      },
+      {
         file: 'evidence/wayback/raw/wap/20041119080710_wap.useeverything.com_ifinfo2.wml.wml',
         note: 'Fighting, sleeping, and wolf guidance.'
       },
       {
-        file: 'evidence/wayback/raw/html/20030104000220_useeverything.com_iforest_whattodo.htm.html',
-        note: 'Wolf is near the stream north of a tourist camping clearing.'
+        file: 'evidence/wayback/raw/html/20081023144508_useeverything.com_iforest_whattodo.htm.html',
+        note: 'Wolf is at the north of the clearing, near a stream, with a camping tourist.'
       }
     ]
   },
@@ -610,14 +654,15 @@ export const rooms = {
     image:
       'evidence/wayback/raw/html-expanded/20040516073534_http_useeverything_com_80_iforest_images_valleypic_small_gif.gif',
     safeSleep: true,
+    lockableWith: 'valley key',
     evidence: [
       {
         file: 'evidence/wayback/raw/html/20020720023846_useeverything.com_iforest_valleyhelp.htm.html',
         note: 'Valley, abandoned house, useful objects, and underground passage.'
       },
       {
-        file: 'evidence/wayback/raw/html/20030104000220_useeverything.com_iforest_whattodo.htm.html',
-        note: 'Valley house needs a key and is a good safe sleeping place.'
+        file: 'evidence/wayback/raw/html/20081023144508_useeverything.com_iforest_whattodo.htm.html',
+        note: '2008 Q7: sleeping behind a locked door with the key is even safer, until fairies eventually respawn a duplicate key.'
       }
     ]
   }
@@ -628,7 +673,7 @@ export const items = {
     id: 'sandwich',
     name: 'teleportation sandwich',
     description:
-      'A curious magical food thought to be made by fairies. The instructions say eating one transports you to wherever that sandwich was made.',
+      'A curious magical food made by the fairies. Eat one and you are transported to wherever that sandwich was made; fairies often leave them in far-off regions for travellers.',
     portable: true,
     madeAt: 'forestown-square'
   },
@@ -700,7 +745,7 @@ export const items = {
     id: 'spellbook',
     name: 'spellbook',
     description:
-      'A scattered spellbook. Once read, a spell becomes permanent and cannot be taken away.',
+      "A scattered spellbook. Reading it teaches the chocolate-weapons spell, which can be cast on any other awake player to turn the weapons they are holding into chocolate. Once learned, the spell is permanent.",
     portable: true,
     teachesSpell: 'chocolate weapons'
   },
@@ -813,7 +858,19 @@ export const items = {
   receptionist: {
     id: 'receptionist',
     name: 'receptionist',
-    description: 'The receptionist from a recovered servlet room.',
+    description: 'An iForest staff member behind a reception desk.',
+    portable: false
+  },
+  forms: {
+    id: 'forms',
+    name: 'forms',
+    description: 'A standard adventuring waiver. The receptionist taps her pen pointedly until you sign.',
+    portable: false
+  },
+  frames: {
+    id: 'frames',
+    name: 'framed adventurers',
+    description: 'Past adventurers in the framed photographs all look proud, fit, and annoyingly confident.',
     portable: false
   },
   lift: {
