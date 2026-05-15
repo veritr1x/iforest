@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+<!DOCTYPE wml PUBLIC "-//WAPFORUM//DTD WML 1.1//EN" "http://www.wapforum.org/DTD/wml_1.1.xml">
+
+<wml>
+   <card id="details" title="Details">
+    <p>Please enter your first name: <input name="c1" maxlength="10" emptyok="false"/> and the name of your companion: <input name="c2" maxlength="10" emptyok="false"/></p>
+    <p><a href="http://useeverything.com/servlets/Driver?c1=$(c1)&amp;c2=$(c2)">Ok</a></p>
+  </card>
+</wml>

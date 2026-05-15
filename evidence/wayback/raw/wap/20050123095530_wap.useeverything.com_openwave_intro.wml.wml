@@ -1,0 +1,17 @@
+<?xml version="1.0"?> 
+<!DOCTYPE wml PUBLIC "-//WAPFORUM//DTD WML 1.1//EN" "http://www.wapforum.org/DTD/wml_1.1.xml"> 
+ 
+<wml> 
+  <card id="start" title="Prologue"> 
+    <do type="options" label="Quit"><go href="#quit"/></do> 
+    <do type="accept" label="Next"><go href="intro2.wml"/></do>
+    <p>The receptionist peers at you from behind her desk, obviously not very impressed with what she's looking at. Around you the walls of the lobby are covered with framed images of past adventurers, all looking proud, fit, and annoyingly confident.</p> 
+    <p>By contrast, you and your companion look like you've come straight from the real world. You don't have the right adventuring clothes, tools, or even a compass.</p>
+ </card> 
+   
+ <card id="quit" title="Confirm"> 
+  <do type="accept" label="No"><prev/></do>
+  <do type="options" label="Yes"><go href="ue.wml"/></do>
+  <p align="center">Are you sure you want to quit?</p> 
+ </card> 
+ </wml> 

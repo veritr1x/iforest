@@ -1,0 +1,13 @@
+<?xml version="1.0"?>
+<!DOCTYPE wml PUBLIC "-//WAPFORUM//DTD WML 1.1//EN" "http://www.wapforum.org/DTD/wml_1.1.xml">
+
+<wml>
+
+  <card id="index" title="Demo">
+ <p>This is a small demo level. Remember to SWAP between your two characters! Have fun!</p>
+ <p><a href="http://useeverything.com/servlets/Driver?code=beanstalk&amp;c=swap">Start</a></p>
+ <p><a href="trouble.wml">Having trouble?</a></p>
+ <p><a href="index.wml">Home</a></p>
+  </card>
+
+</wml>

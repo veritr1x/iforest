@@ -1,0 +1,14 @@
+<?xml version="1.0"?> 
+<!DOCTYPE wml PUBLIC "-//WAPFORUM//DTD WML 1.1//EN" "http://www.wapforum.org/DTD/wml_1.1.xml"> 
+
+<wml> 
+  
+  <card id="index" title="Instructions"> 
+ <p>To do any of these things, scroll down until the selection element is highlighted. Click on it, and you are given a list of possible commands. The commands vary from place to place, depending on what you can do. Choose a command by clicking on it.</p>
+ <p>If you click on some commands, such as use, they require you to choose an object. You will be given a list of objects in this location, or can choose something you're carrying.</p>
+ <p>It might all sound complicated&shy; it isn't. Just try it and it should make sense.</p>
+ <p><a href="ins3.wml">Next...</a></p>
+ <p><a href="ue.wml">Home</a></p>
+  </card> 
+    
+</wml> 

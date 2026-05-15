@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+<!DOCTYPE wml PUBLIC "-//WAPFORUM//DTD WML 1.1//EN" "http://www.wapforum.org/DTD/wml_1.1.xml">
+
+<wml>
+  <card id="main" title="Terms of Use">
+    <do type="accept" label="Next"><go href="terms2.wml"/></do>
+    <do type="options" label="Done"><prev/></do>
+    <p>(This is quite long. You may prefer to read it on the website!):</p>
+    <p>UseEverything.com provides Internet-based games for WAP-enabled devices. It is accessible at "wap.useeverything.com" and "wap.littlescreen.co.uk". There is also a supporting website at "www.useeverything.com". All of the content at these Internet addresses will be collectively referred to as the Site.</p>
+    <p>Please read these Terms of Use. BY PLAYING A GAME ON THE SITE, OR OTHERWISE ACCESSING THE SITE, YOU ARE SHOWING THAT YOU AGREE TO THE TERMS. IF YOU DO NOT AGREE, DO NOT ACCESS THE SITE OR PLAY ANY OF THE GAMES.</p>
+    <p>Check back here regularly, as the terms may change from time to time. The terms are:</p>
+    <p>1. You accept that everything on the Site is provided on an "as is" basis without any warranties of any kind.</p>
+  </card>
+</wml>

@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<!DOCTYPE wml PUBLIC "-//WAPFORUM//DTD WML 1.1//EN" "http://www.wapforum.org/DTD/wml_1.1.xml">
+
+<wml>
+ <card id="main" title="About">
+  <p>UseEverything.com provides you with adventure games for your mobile phone.</p>
+  <p>Currently there are three games available:</p>
+  <p>&shy; Vampire Country: this is a single player game, set in a theme park full of vampires.</p>
+  <p>&shy; iForest: this is a multiplayer adventure. Explore, pick things up, and annoy the other players.</p>
+  <p>&shy; UseEverything: this is a single player, fairly standard text adventure.</p>
+  <p>Have fun, and please visit the website at www.useeverything.com</p>
+  <p><a href="index.wml">Back</a></p>
+  <do type="accept" label="Back"><prev/></do>
+  </card>
+</wml>

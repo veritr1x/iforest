@@ -1,0 +1,12 @@
+<?xml version="1.0"?> 
+<!DOCTYPE wml PUBLIC "-//WAPFORUM//DTD WML 1.1//EN" "http://www.wapforum.org/DTD/wml_1.1.xml"> 
+
+<wml> 
+  
+  <card id="index" title="Trouble?"> 
+ <p>If you are having trouble starting the game, it may be bacause your browser isn&apos;t compatible. If you&apos;re using a web&shy;based browser, <a href="web.wml">click here</a>.</p>
+ <p>Sorry about that!</p>
+ <p><a href="index.wml">Home</a></p>
+  </card> 
+    
+</wml> 

@@ -1,0 +1,17 @@
+<?xml version="1.0"?> 
+<!DOCTYPE wml PUBLIC "-//WAPFORUM//DTD WML 1.1//EN" "http://www.wapforum.org/DTD/wml_1.1.xml"> 
+
+<wml> 
+  
+  <card id="index" title="Instructions"> 
+ <p>What the game looks like:</p>
+ <p>While playing the game, you will be presented with screens that look something like this:</p>
+ <p>&shy;&shy;</p>
+ <p>DARREN: You are standing in a deserted street. All of the houses appear to be empty, many have broken windows. You can go west, east, north. There is a phone box here.</p>
+ <p>&shy;&shy;</p>
+ <p>The display on your phone is probably quite small, so you will have to scroll up and down to read the whole thing. Where it says, There is a phone box here, it means that the phone box is an object that you can do something with. You might want to use it, or attack it. You might want to walk north from here, or west or east.</p>
+ <p><a href="ins2.wml">Next...</a></p>
+ <p><a href="ue.wml">Home</a></p>
+  </card> 
+    
+</wml> 

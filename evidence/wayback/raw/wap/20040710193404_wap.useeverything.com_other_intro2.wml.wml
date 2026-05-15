@@ -1,0 +1,26 @@
+<?xml version="1.0"?> 
+<!DOCTYPE wml PUBLIC "-//WAPFORUM//DTD WML 1.1//EN" "http://www.wapforum.org/DTD/wml_1.1.xml"> 
+ 
+<wml> 
+ 
+  <card id="start" title="Prologue"> 
+    <do type="unknown" label="Quit"><go href="#quit"/></do> 
+    
+    <p>"Are you SURE you know what you're letting yourselves in for?" she asks. "We don't want to have to come in and rescue you."</p><p></p> 
+		<p>Annoyed by her opinion of your chances, you both say you are sure. "Alright," she sighs, obviously not convinced, "fill these forms in, and get into the lift."</p><p></p>
+		<p>You both sign on the dotted line, and hurry towards the lift. The receptionist smiles as she watches you depart.</p>
+		<p>"Don't get lost!" she calls after you, but you're not really listening.</p>
+		<p><a href="details.wml">Begin...</a></p>     
+
+  </card> 
+   
+  <card id="quit" title="Confirm"> 
+    <p align="center"> 
+      Are you sure you want to quit? 
+    </p> 
+		<p align="center">
+		<a href="index.wml">Yes</a>&shy;&shy;&shy;
+		<a href="#main">No</a>
+		</p>
+  </card> 
+ </wml> 

@@ -1,0 +1,12 @@
+<?xml version="1.0"?> 
+<!DOCTYPE wml PUBLIC "-//WAPFORUM//DTD WML 1.1//EN" "http://www.wapforum.org/DTD/wml_1.1.xml"> 
+
+<wml> 
+  
+  <card id="index" title="Web game">
+ <p>If you've got a web&shy;browser handy, you can play a web&shy;based demo level. Go to useeverything.com, and try the demo.</p>
+ <p>The game won&apos;t work on many web&shy;based WAP emaultors, as its pages are too complicated. That&apos;s why I&apos;ve written my own browser for the website.</p>
+ <p><a href="ue.wml">Home</a></p>
+  </card> 
+    
+</wml> 

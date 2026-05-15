@@ -1,0 +1,13 @@
+<?xml version="1.0"?>
+<!DOCTYPE wml PUBLIC "-//WAPFORUM//DTD WML 1.1//EN" "http://www.wapforum.org/DTD/wml_1.1.xml">
+
+<wml>
+
+  <card id="index" title="Play">
+ <p>The game needs a full WAP browser to play it. If you are using a web-based emulator, <a href="web.wml">click here</a>.</p>
+ <p><a href="demo.wml">Play demo level</a></p>
+ <p><a href="intro.wml">Full game</a></p>
+ <p><a href="index.wml">Home</a></p>
+  </card>
+
+</wml>

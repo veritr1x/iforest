@@ -1,0 +1,15 @@
+<?xml version="1.0"?> 
+<!DOCTYPE wml PUBLIC "-//WAPFORUM//DTD WML 1.1//EN" "http://www.wapforum.org/DTD/wml_1.1.xml"> 
+
+<wml> 
+  
+  <card id="index" title="Instructions"> 
+ <p>Swapping:</p>
+ <p>One really important thing in the game is to swap between the characters. You are controlling two separate people, and can change which you are controlling at any time using the swap command. So for example, if DARREN gets stuck in a hole somewhere, TRACEY might be able to find a rope and go help him.</p>
+ <p>When you're not controlling a character, he or she just stands there and does nothing. Don't worry, nothing bad will happen to them while you're gone.</p>
+ <p>Bookmarks:</p>
+ <p>Whenever you want to stop playing, it's important to bookmark where you are. This will save the state of the game on your phone, so you can come back to it later. See your phone's manual if you don't know how to bookmark pages and go back to them later.</p>
+ <p><a href="ue.wml">Home</a></p>
+  </card> 
+    
+</wml> 
