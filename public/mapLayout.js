@@ -5,37 +5,16 @@ const DELTAS = {
   west: { x: -1, y: 0 }
 };
 
-function findAvailableCell(occupiedCells, preferredX, preferredY, maxSearch = 20) {
-  const key = (x, y) => `${x},${y}`;
-  if (!occupiedCells.has(key(preferredX, preferredY))) {
-    return { x: preferredX, y: preferredY };
-  }
-
-  // Spiral search for an empty cell
-  for (let radius = 1; radius <= maxSearch; radius++) {
-    for (let x = preferredX - radius; x <= preferredX + radius; x++) {
-      for (let y = preferredY - radius; y <= preferredY + radius; y++) {
-        if ((Math.abs(x - preferredX) === radius || Math.abs(y - preferredY) === radius) &&
-            !occupiedCells.has(key(x, y))) {
-          return { x, y };
-        }
-      }
-    }
-  }
-  // Fallback: return the preferred position (shouldn't happen)
-  return { x: preferredX, y: preferredY };
-}
-
 export function computeMapLayout(rooms, startId) {
   const positions = new Map();
-  const occupiedCells = new Set();
+  const occupied = new Set();
 
   if (!rooms[startId]) {
     return { positions, bounds: { minX: 0, maxX: 0, minY: 0, maxY: 0 } };
   }
 
   positions.set(startId, { x: 0, y: 0 });
-  occupiedCells.add('0,0');
+  occupied.add('0,0');
   const queue = [startId];
 
   while (queue.length) {
@@ -45,13 +24,17 @@ export function computeMapLayout(rooms, startId) {
     for (const [dir, nextId] of Object.entries(exits)) {
       const delta = DELTAS[dir];
       if (!delta) continue;
-      if (positions.has(nextId)) continue;
+      if (positions.has(nextId)) continue; // first-placement-wins per room
       if (!rooms[nextId]) continue;
-      const preferredX = here.x + delta.x;
-      const preferredY = here.y + delta.y;
-      const cell = findAvailableCell(occupiedCells, preferredX, preferredY);
-      positions.set(nextId, cell);
-      occupiedCells.add(`${cell.x},${cell.y}`);
+      // Bump in-direction until an empty cell is found.
+      let nx = here.x + delta.x;
+      let ny = here.y + delta.y;
+      while (occupied.has(`${nx},${ny}`)) {
+        nx += delta.x;
+        ny += delta.y;
+      }
+      positions.set(nextId, { x: nx, y: ny });
+      occupied.add(`${nx},${ny}`);
       queue.push(nextId);
     }
   }
