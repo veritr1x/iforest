@@ -43,7 +43,7 @@ export const rooms = {
     },
     nouns: ['sandwich', 'map', 'sleeping players'],
     image:
-      '/evidence/wayback/raw/littlescreen/20020317045912_http___littlescreen.co.uk_80_iforest_images_townpic.gif.gif',
+      'evidence/wayback/raw/littlescreen/20020317045912_http___littlescreen.co.uk_80_iforest_images_townpic.gif.gif',
     evidence: [
       {
         file: 'evidence/wayback/raw/html/20020719162915_useeverything.com_iforest_townhelp.htm.html',
@@ -202,7 +202,7 @@ export const rooms = {
     },
     nouns: ['fairy'],
     image:
-      '/evidence/wayback/raw/littlescreen/20010804060317_http___littlescreen.co.uk_80_iforest_images_fairysmall.gif.gif',
+      'evidence/wayback/raw/littlescreen/20010804060317_http___littlescreen.co.uk_80_iforest_images_fairysmall.gif.gif',
     evidence: [
       {
         file: 'evidence/wayback/raw/wap/20041121155041_wap.useeverything.com_ifinfo4.wml.wml',
@@ -223,7 +223,7 @@ export const rooms = {
     },
     nouns: ['wolf', 'stick', 'tourist'],
     image:
-      '/evidence/wayback/raw/html/20060106093348_useeverything.com_iforest_images_wolfcrop.jpg.jpg',
+      'evidence/wayback/raw/html/20060106093348_useeverything.com_iforest_images_wolfcrop.jpg.jpg',
     evidence: [
       {
         file: 'evidence/wayback/raw/html/20020829185908_useeverything.com_iforest_foresthelp.htm.html',
@@ -304,7 +304,7 @@ export const rooms = {
     commands: ['west', 'look', 'inventory', 'examine', 'stamp', 'sleep', 'wait'],
     nouns: ['hand stamp'],
     image:
-      '/evidence/wayback/raw/littlescreen/20010804060317_http___littlescreen.co.uk_80_iforest_images_fairysmall.gif.gif',
+      'evidence/wayback/raw/littlescreen/20010804060317_http___littlescreen.co.uk_80_iforest_images_fairysmall.gif.gif',
     evidence: [
       {
         file: 'evidence/wayback/raw/html/20020605184517_useeverything.com_iforest_touristinfo.htm.html',
@@ -327,7 +327,7 @@ export const rooms = {
     },
     nouns: ['baron trace', 'valley key'],
     image:
-      '/evidence/wayback/raw/html-expanded/20040516073534_http_useeverything_com_80_iforest_images_valleypic_small_gif.gif',
+      'evidence/wayback/raw/html-expanded/20040516073534_http_useeverything_com_80_iforest_images_valleypic_small_gif.gif',
     evidence: [
       {
         file: 'evidence/wayback/raw/html/20030104000220_useeverything.com_iforest_whattodo.htm.html',
@@ -370,7 +370,7 @@ export const rooms = {
     commands: ['south', 'look', 'inventory', 'take', 'drop', 'use', 'examine', 'climb', 'sleep', 'wait'],
     nouns: ['tall tree'],
     image:
-      '/evidence/wayback/raw/html-expanded/20030305044700_http_useeverything_com_80_iforest_images_ForestPic_small_gif.gif',
+      'evidence/wayback/raw/html-expanded/20030305044700_http_useeverything_com_80_iforest_images_ForestPic_small_gif.gif',
     evidence: [
       {
         file: 'evidence/wayback/raw/html/20030104000220_useeverything.com_iforest_whattodo.htm.html',
@@ -389,7 +389,7 @@ export const rooms = {
     commands: ['south', 'look', 'inventory', 'take', 'drop', 'use', 'examine', 'claim', 'sleep', 'wait'],
     nouns: ['marker key', 'marker'],
     image:
-      '/evidence/wayback/raw/html-expanded/20020918022251_http_useeverything_com_80_iforest_images_marker_gif.gif',
+      'evidence/wayback/raw/html-expanded/20020918022251_http_useeverything_com_80_iforest_images_marker_gif.gif',
     evidence: [
       {
         file: 'evidence/wayback/raw/html/20030104000220_useeverything.com_iforest_whattodo.htm.html',
@@ -463,7 +463,7 @@ export const rooms = {
     },
     nouns: ['guard'],
     image:
-      '/evidence/wayback/raw/littlescreen/20020313232535_http___littlescreen.co.uk_80_iforest_images_MansionPic.gif.gif',
+      'evidence/wayback/raw/littlescreen/20020313232535_http___littlescreen.co.uk_80_iforest_images_MansionPic.gif.gif',
     evidence: [
       {
         file: 'evidence/wayback/raw/html/20020718091746_useeverything.com_iforest_mansionhelp.htm.html',
@@ -544,7 +544,7 @@ export const rooms = {
     },
     nouns: ['camera', 'marker'],
     image:
-      '/evidence/wayback/raw/html-expanded/20030305045115_http_useeverything_com_80_iforest_images_MountainPic_small_gif.gif',
+      'evidence/wayback/raw/html-expanded/20030305045115_http_useeverything_com_80_iforest_images_MountainPic_small_gif.gif',
     evidence: [
       {
         file: 'evidence/wayback/raw/html/20020829190859_useeverything.com_iforest_mountainhelp.htm.html',
@@ -562,7 +562,7 @@ export const rooms = {
     },
     nouns: ['goblin', 'troll', 'dragon', 'sword'],
     image:
-      '/evidence/wayback/raw/littlescreen/20010831001024_http___littlescreen.co.uk_80_iforest_images_goblincrop.jpg.jpg',
+      'evidence/wayback/raw/littlescreen/20010831001024_http___littlescreen.co.uk_80_iforest_images_goblincrop.jpg.jpg',
     evidence: [
       {
         file: 'evidence/wayback/raw/html/20020829190859_useeverything.com_iforest_mountainhelp.htm.html',
@@ -585,7 +585,7 @@ export const rooms = {
     commands: ['north', 'look', 'inventory', 'take', 'drop', 'use', 'examine', 'claim', 'sleep', 'wait'],
     nouns: ['camera', 'marker'],
     image:
-      '/evidence/wayback/raw/html-expanded/20020918022251_http_useeverything_com_80_iforest_images_marker_gif.gif',
+      'evidence/wayback/raw/html-expanded/20020918022251_http_useeverything_com_80_iforest_images_marker_gif.gif',
     evidence: [
       {
         file: 'evidence/wayback/raw/html/20020829190859_useeverything.com_iforest_mountainhelp.htm.html',
@@ -608,7 +608,7 @@ export const rooms = {
     },
     nouns: ['climb stone', 'sandwich', 'valley key'],
     image:
-      '/evidence/wayback/raw/html-expanded/20040516073534_http_useeverything_com_80_iforest_images_valleypic_small_gif.gif',
+      'evidence/wayback/raw/html-expanded/20040516073534_http_useeverything_com_80_iforest_images_valleypic_small_gif.gif',
     safeSleep: true,
     evidence: [
       {

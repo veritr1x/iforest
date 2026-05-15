@@ -95,7 +95,7 @@ document.addEventListener('keydown', (event) => {
 
 async function detectMode() {
   try {
-    const response = await fetch('/api/health', { cache: 'no-store' });
+    const response = await fetch('api/health', { cache: 'no-store' });
     if (response.ok) {
       serverMode = true;
       return;
@@ -109,7 +109,7 @@ async function detectMode() {
 
 async function startGame(name) {
   if (serverMode) {
-    const response = await fetch('/api/new', {
+    const response = await fetch('api/new', {
       method: 'POST',
       headers: { 'content-type': 'application/json' },
       body: JSON.stringify({ name })
@@ -128,7 +128,7 @@ async function startGame(name) {
 
 async function runCommand(verb, target = '') {
   if (serverMode) {
-    const response = await fetch('/api/command', {
+    const response = await fetch('api/command', {
       method: 'POST',
       headers: { 'content-type': 'application/json' },
       body: JSON.stringify({ id: sessionId, command: { verb, target } })
@@ -379,7 +379,7 @@ function sectionLinks(title, entries) {
   entries.forEach((entry) => {
     const li = document.createElement('li');
     const link = document.createElement('a');
-    link.href = `/${entry.file}`;
+    link.href = entry.file;
     link.target = '_blank';
     link.rel = 'noopener';
     link.textContent = entry.file.replace('evidence/wayback/raw/', '');
