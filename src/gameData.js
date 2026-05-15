@@ -23,7 +23,8 @@ export const recoveredSystems = [
   'character face selection (~20 per gender) shown by examine player',
   'PvP combat using best held weapon and best held defence, with one carried item dropped per hit',
   'hospital + lost-property recovery loop when strength reaches zero',
-  'reception lobby and lift entry preceding Forestown square'
+  'reception lobby and lift entry preceding Forestown square',
+  'crowded-location overflow text ("lots of players are here") for postage-stamp screens'
 ];
 
 export const FACES = {

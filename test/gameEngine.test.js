@@ -290,6 +290,7 @@ describe('iForest reconstructed game engine', () => {
     assert.ok(game.view.systems.some((s) => /PvP/i.test(s)), 'PvP combat in systems');
     assert.ok(game.view.systems.some((s) => /hospital/i.test(s)), 'hospital recovery in systems');
     assert.ok(game.view.systems.some((s) => /reception/i.test(s)), 'reception lobby in systems');
+    assert.ok(game.view.systems.some((s) => /lots of players/i.test(s)), 'crowded-location overflow text in systems');
   });
 
   it('attributes the teleportation sandwich to the fairies', () => {
