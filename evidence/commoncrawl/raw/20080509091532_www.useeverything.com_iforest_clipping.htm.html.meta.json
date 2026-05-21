@@ -1,0 +1,19 @@
+{
+  "row": {
+    "timestamp": "20080509091532",
+    "url": "http://www.useeverything.com/iforest/clipping.htm",
+    "status": "200",
+    "mime": "text/html",
+    "digest": "SNPAJBAC55PX5OZDVMHHCG356PEDT2G6",
+    "filename": "crawl-001/2008/06/19/7/1213886895112_7.arc.gz",
+    "offset": "43492922",
+    "length": "2592"
+  },
+  "dataUrl": "https://data.commoncrawl.org/crawl-001/2008/06/19/7/1213886895112_7.arc.gz",
+  "range": "bytes=43492922-43495513",
+  "arcHeader": "http://www.useeverything.com/iforest/clipping.htm 91.203.57.6 20080509091532 text/html 11710",
+  "httpHeader": "HTTP/1.1 200 OK\r\nDate:Fri, 09 May 2008 16:15:32 GMT\r\nServer:Apache/1.3.26 (Unix) Debian GNU/Linux mod_gzip/1.3.19.1a mod_auth_pgsql/0.9.12 ApacheJServ/1.1.2 mod_ssl/2.8.9 OpenSSL/0.9.6c\r\nLast-Modified:Sun, 19 May 2002 09:22:39 GMT\r\nETag:\"4840a9-2b21-3ce76edf\"\r\nAccept-Ranges:bytes\r\nContent-Length:11041\r\nConnection:close\r\nContent-Type:text/html\r\nx_commoncrawl_ParseSegmentId:23\r\nx_commoncrawl_OriginalURL:http://www.useeverything.com/iforest/clipping.htm\r\nx_commoncrawl_URLFP:-2034212605850995877\r\nx_commoncrawl_HostFP:-142784644528352630\r\nx_commoncrawl_Signature:84620d65f7da7cd05ca05129202aa28e\r\nx_commoncrawl_CrawlNo:1\r\nx_commoncrawl_FetchTimestamp:1210349732594",
+  "rawFile": "evidence/commoncrawl/raw/20080509091532_www.useeverything.com_iforest_clipping.htm.html",
+  "bytes": 11041,
+  "sha256": "423c141387ce922d609323cfbe8cdd64e5d11cd8ae76b3860c8ee39d98a4daf1"
+}

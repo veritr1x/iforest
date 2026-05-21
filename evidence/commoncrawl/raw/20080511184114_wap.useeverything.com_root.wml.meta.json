@@ -1,0 +1,19 @@
+{
+  "row": {
+    "timestamp": "20080511184114",
+    "url": "http://wap.useeverything.com/",
+    "status": "200",
+    "mime": "text/vnd.wap.wml",
+    "digest": "OQZWT7V3ULWINAGKWFCRZVICJKMMEILB",
+    "filename": "crawl-001/2008/06/25/1/1214443761241_1.arc.gz",
+    "offset": "69189982",
+    "length": "705"
+  },
+  "dataUrl": "https://data.commoncrawl.org/crawl-001/2008/06/25/1/1214443761241_1.arc.gz",
+  "range": "bytes=69189982-69190686",
+  "arcHeader": "http://wap.useeverything.com/ 91.203.57.6 20080511184114 text/vnd.wap.wml 1071",
+  "httpHeader": "HTTP/1.1 200 OK\r\nDate:Mon, 12 May 2008 01:41:14 GMT\r\nServer:Apache/1.3.26 (Unix) Debian GNU/Linux mod_gzip/1.3.19.1a mod_auth_pgsql/0.9.12 ApacheJServ/1.1.2 mod_ssl/2.8.9 OpenSSL/0.9.6c\r\nLast-Modified:Sun, 08 Sep 2002 13:14:33 GMT\r\nETag:\"484157-1a1-3d7b4d39\"\r\nAccept-Ranges:bytes\r\nContent-Length:417\r\nConnection:close\r\nContent-Type:text/vnd.wap.wml\r\nx_commoncrawl_ParseSegmentId:2673\r\nx_commoncrawl_OriginalURL:http://wap.useeverything.com/\r\nx_commoncrawl_URLFP:1668558568392374466\r\nx_commoncrawl_HostFP:4446586865785243549\r\nx_commoncrawl_Signature:a0c88fa660a5dcac698cbf941983399d\r\nx_commoncrawl_CrawlNo:1\r\nx_commoncrawl_FetchTimestamp:1210556474777",
+  "rawFile": "evidence/commoncrawl/raw/20080511184114_wap.useeverything.com_root.wml",
+  "bytes": 417,
+  "sha256": "4cf7eec79b3c28e2dce32ae640a08d76893f56e1130e0ff55da54b23d74421f0"
+}

@@ -1,0 +1,19 @@
+{
+  "row": {
+    "timestamp": "20081121175105",
+    "url": "http://www.useeverything.com/vampire/ins4.htm",
+    "status": "200",
+    "mime": "text/html",
+    "digest": "M4QTFIM4V6DB2NNIKQ3YRWRPQB2MKSRE",
+    "filename": "crawl-001/2008/11/29/4/1227994125062_4.arc.gz",
+    "offset": "98687708",
+    "length": "2285"
+  },
+  "dataUrl": "https://data.commoncrawl.org/crawl-001/2008/11/29/4/1227994125062_4.arc.gz",
+  "range": "bytes=98687708-98689992",
+  "arcHeader": "http://www.useeverything.com/vampire/ins4.htm 91.203.57.6 20081121175105 text/html 11834",
+  "httpHeader": "HTTP/1.1 200 OK\r\nDate:Sat, 22 Nov 2008 01:51:04 GMT\r\nServer:Apache/1.3.26 (Unix) Debian GNU/Linux mod_gzip/1.3.19.1a mod_auth_pgsql/0.9.12 ApacheJServ/1.1.2 mod_ssl/2.8.9 OpenSSL/0.9.6c\r\nLast-Modified:Sun, 19 May 2002 09:49:27 GMT\r\nETag:\"48413f-2b9f-3ce77527\"\r\nAccept-Ranges:bytes\r\nContent-Length:11167\r\nConnection:close\r\nContent-Type:text/html\r\nx_commoncrawl_ParseSegmentId:4846\r\nx_commoncrawl_OriginalURL:http://www.useeverything.com/vampire/ins4.htm\r\nx_commoncrawl_URLFP:-1815295070769768164\r\nx_commoncrawl_HostFP:-142784644528352630\r\nx_commoncrawl_Signature:f32758a4e832d1b92927fbb83a4d6d06\r\nx_commoncrawl_CrawlNo:1\r\nx_commoncrawl_FetchTimestamp:1227318665246",
+  "rawFile": "evidence/commoncrawl/raw/20081121175105_www.useeverything.com_vampire_ins4.htm.html",
+  "bytes": 11167,
+  "sha256": "d8af19470b25a520cc668cccd19adc518a68537a3630fdc02d815c01d265f959"
+}

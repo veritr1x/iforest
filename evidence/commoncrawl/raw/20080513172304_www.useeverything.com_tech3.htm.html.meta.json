@@ -1,0 +1,19 @@
+{
+  "row": {
+    "timestamp": "20080513172304",
+    "url": "http://www.useeverything.com/tech3.htm",
+    "status": "200",
+    "mime": "text/html",
+    "digest": "2WNXVW6W24NW2V4ZWGF5AZLORTSXSATA",
+    "filename": "crawl-001/2008/06/25/4/1214435702096_4.arc.gz",
+    "offset": "20714262",
+    "length": "2365"
+  },
+  "dataUrl": "https://data.commoncrawl.org/crawl-001/2008/06/25/4/1214435702096_4.arc.gz",
+  "range": "bytes=20714262-20716626",
+  "arcHeader": "http://www.useeverything.com/tech3.htm 91.203.57.6 20080513172304 text/html 11096",
+  "httpHeader": "HTTP/1.1 200 OK\r\nDate:Wed, 14 May 2008 00:23:03 GMT\r\nServer:Apache/1.3.26 (Unix) Debian GNU/Linux mod_gzip/1.3.19.1a mod_auth_pgsql/0.9.12 ApacheJServ/1.1.2 mod_ssl/2.8.9 OpenSSL/0.9.6c\r\nLast-Modified:Sun, 19 May 2002 09:48:53 GMT\r\nETag:\"f74025-28e4-3ce77505\"\r\nAccept-Ranges:bytes\r\nContent-Length:10468\r\nConnection:close\r\nContent-Type:text/html\r\nx_commoncrawl_ParseSegmentId:3568\r\nx_commoncrawl_OriginalURL:http://www.useeverything.com/tech3.htm\r\nx_commoncrawl_URLFP:-8637329544630651342\r\nx_commoncrawl_HostFP:-142784644528352630\r\nx_commoncrawl_Signature:\r\nx_commoncrawl_CrawlNo:1\r\nx_commoncrawl_FetchTimestamp:1210724584286",
+  "rawFile": "evidence/commoncrawl/raw/20080513172304_www.useeverything.com_tech3.htm.html",
+  "bytes": 10468,
+  "sha256": "21274328fdb9961e177150c52cf8d0bfffd8c95b9195d250df7c9c72aaceec7f"
+}

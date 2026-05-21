@@ -1,0 +1,19 @@
+{
+  "row": {
+    "timestamp": "20080516203101",
+    "url": "http://www.useeverything.com/iforest/mansionhelp.htm",
+    "status": "200",
+    "mime": "text/html",
+    "digest": "YRCFKS722AN2CVW2JRGIMNY63MH2MEVF",
+    "filename": "crawl-001/2008/06/25/1/1214442825903_1.arc.gz",
+    "offset": "36355785",
+    "length": "2477"
+  },
+  "dataUrl": "https://data.commoncrawl.org/crawl-001/2008/06/25/1/1214442825903_1.arc.gz",
+  "range": "bytes=36355785-36358261",
+  "arcHeader": "http://www.useeverything.com/iforest/mansionhelp.htm 91.203.57.6 20080516203101 text/html 11067",
+  "httpHeader": "HTTP/1.1 200 OK\r\nDate:Sat, 17 May 2008 03:31:01 GMT\r\nServer:Apache/1.3.26 (Unix) Debian GNU/Linux mod_gzip/1.3.19.1a mod_auth_pgsql/0.9.12 ApacheJServ/1.1.2 mod_ssl/2.8.9 OpenSSL/0.9.6c\r\nLast-Modified:Sun, 19 May 2002 09:23:24 GMT\r\nETag:\"4840bc-28b9-3ce76f0c\"\r\nAccept-Ranges:bytes\r\nContent-Length:10425\r\nConnection:close\r\nContent-Type:text/html\r\nx_commoncrawl_ParseSegmentId:3622\r\nx_commoncrawl_OriginalURL:http://www.useeverything.com/iforest/mansionhelp.htm\r\nx_commoncrawl_URLFP:-5350804693478438219\r\nx_commoncrawl_HostFP:4034211254985817041\r\nx_commoncrawl_Signature:\r\nx_commoncrawl_CrawlNo:1\r\nx_commoncrawl_FetchTimestamp:1210995061724",
+  "rawFile": "evidence/commoncrawl/raw/20080516203101_www.useeverything.com_iforest_mansionhelp.htm.html",
+  "bytes": 10425,
+  "sha256": "a64f61395faa4c8e31cbbd47456a3f4266e63deec7be454f949cece16ebd600f"
+}

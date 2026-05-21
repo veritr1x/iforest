@@ -1,0 +1,20 @@
+{
+  "id": "cc-main-2008-2009-wap-littlescreen",
+  "index": "CC-MAIN-2008-2009",
+  "target": "wap.littlescreen.co.uk/*",
+  "queryUrl": "https://index.commoncrawl.org/CC-MAIN-2008-2009-index?url=wap.littlescreen.co.uk%2F*&output=json&filter=status%3A200&fl=timestamp%2Curl%2Cstatus%2Cmime%2Cdigest%2Cfilename%2Coffset%2Clength&collapse=urlkey&limit=200",
+  "status": 200,
+  "rows": [
+    {
+      "timestamp": "20080511185424",
+      "url": "http://wap.littlescreen.co.uk/",
+      "status": "200",
+      "mime": "text/vnd.wap.wml",
+      "digest": "OQZWT7V3ULWINAGKWFCRZVICJKMMEILB",
+      "filename": "crawl-001/2008/06/25/9/1214441282402_9.arc.gz",
+      "offset": "12658703",
+      "length": "721"
+    }
+  ],
+  "messages": []
+}

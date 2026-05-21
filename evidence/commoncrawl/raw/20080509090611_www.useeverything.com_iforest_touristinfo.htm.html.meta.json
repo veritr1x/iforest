@@ -1,0 +1,19 @@
+{
+  "row": {
+    "timestamp": "20080509090611",
+    "url": "http://www.useeverything.com/iforest/touristinfo.htm",
+    "status": "200",
+    "mime": "text/html",
+    "digest": "GFW5OYI6C6ZWMJN6C7DRKVYZFBPBPS6R",
+    "filename": "crawl-001/2008/06/19/7/1213886727312_7.arc.gz",
+    "offset": "32228073",
+    "length": "2321"
+  },
+  "dataUrl": "https://data.commoncrawl.org/crawl-001/2008/06/19/7/1213886727312_7.arc.gz",
+  "range": "bytes=32228073-32230393",
+  "arcHeader": "http://www.useeverything.com/iforest/touristinfo.htm 91.203.57.6 20080509090611 text/html 11123",
+  "httpHeader": "HTTP/1.1 200 OK\r\nDate:Fri, 09 May 2008 16:06:11 GMT\r\nServer:Apache/1.3.26 (Unix) Debian GNU/Linux mod_gzip/1.3.19.1a mod_auth_pgsql/0.9.12 ApacheJServ/1.1.2 mod_ssl/2.8.9 OpenSSL/0.9.6c\r\nLast-Modified:Sun, 19 May 2002 09:23:54 GMT\r\nETag:\"4840c2-28d3-3ce76f2a\"\r\nAccept-Ranges:bytes\r\nContent-Length:10451\r\nConnection:close\r\nContent-Type:text/html\r\nx_commoncrawl_ParseSegmentId:23\r\nx_commoncrawl_OriginalURL:http://www.useeverything.com/iforest/touristinfo.htm\r\nx_commoncrawl_URLFP:-7862289011628421752\r\nx_commoncrawl_HostFP:-142784644528352630\r\nx_commoncrawl_Signature:f18bbf19a9840cc0362a18f5ae791d5a\r\nx_commoncrawl_CrawlNo:1\r\nx_commoncrawl_FetchTimestamp:1210349171362",
+  "rawFile": "evidence/commoncrawl/raw/20080509090611_www.useeverything.com_iforest_touristinfo.htm.html",
+  "bytes": 10451,
+  "sha256": "255ddfc3d36c6f05c15e203d87ecbea67e65442306cfaed8794d15bbbaea7f00"
+}

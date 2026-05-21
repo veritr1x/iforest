@@ -1,0 +1,19 @@
+{
+  "row": {
+    "timestamp": "20090107090039",
+    "url": "http://littlescreen.co.uk/",
+    "status": "200",
+    "mime": "text/html",
+    "digest": "65R3O7Q7TGRMHPRD2VQMWQADRQ4HI7OT",
+    "filename": "crawl-001/2009/01/12/20/1231767202561_20.arc.gz",
+    "offset": "27505808",
+    "length": "1007"
+  },
+  "dataUrl": "https://data.commoncrawl.org/crawl-001/2009/01/12/20/1231767202561_20.arc.gz",
+  "range": "bytes=27505808-27506814",
+  "arcHeader": "http://littlescreen.co.uk/ 91.203.57.6 20090107090039 text/html 1946",
+  "httpHeader": "HTTP/1.1 200 OK\r\nDate:Wed, 07 Jan 2009 17:00:38 GMT\r\nServer:Apache/1.3.26 (Unix) Debian GNU/Linux mod_gzip/1.3.19.1a mod_auth_pgsql/0.9.12 ApacheJServ/1.1.2 mod_ssl/2.8.9 OpenSSL/0.9.6c\r\nLast-Modified:Sun, 19 May 2002 10:00:16 GMT\r\nETag:\"48436f-514-3ce777b0\"\r\nAccept-Ranges:bytes\r\nContent-Length:1300\r\nConnection:close\r\nContent-Type:text/html\r\nx_commoncrawl_ParseSegmentId:5544\r\nx_commoncrawl_OriginalURL:http://littlescreen.co.uk/\r\nx_commoncrawl_URLFP:-8331885499754528510\r\nx_commoncrawl_HostFP:6539595268454951074\r\nx_commoncrawl_Signature:b844ce0fdaf19e184c0684ac379ddcbc\r\nx_commoncrawl_CrawlNo:1\r\nx_commoncrawl_FetchTimestamp:1231347639595",
+  "rawFile": "evidence/commoncrawl/raw/20090107090039_littlescreen.co.uk_root.html",
+  "bytes": 1300,
+  "sha256": "9b2c1b5ef48472d221da8a7f45580807391e7ced398c859c73d97897d9064e5f"
+}

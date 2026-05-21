@@ -1,0 +1,19 @@
+{
+  "row": {
+    "timestamp": "20080513215934",
+    "url": "http://www.useeverything.com/iforest/ins2.htm",
+    "status": "200",
+    "mime": "text/html",
+    "digest": "HDN4LCCYOS7M5EK2XWMQFANK2HFSRGD6",
+    "filename": "crawl-001/2008/06/25/3/1214435788604_3.arc.gz",
+    "offset": "13769600",
+    "length": "2539"
+  },
+  "dataUrl": "https://data.commoncrawl.org/crawl-001/2008/06/25/3/1214435788604_3.arc.gz",
+  "range": "bytes=13769600-13772138",
+  "arcHeader": "http://www.useeverything.com/iforest/ins2.htm 91.203.57.6 20080513215934 text/html 11716",
+  "httpHeader": "HTTP/1.1 200 OK\r\nDate:Wed, 14 May 2008 04:59:34 GMT\r\nServer:Apache/1.3.26 (Unix) Debian GNU/Linux mod_gzip/1.3.19.1a mod_auth_pgsql/0.9.12 ApacheJServ/1.1.2 mod_ssl/2.8.9 OpenSSL/0.9.6c\r\nLast-Modified:Sun, 19 May 2002 09:22:56 GMT\r\nETag:\"4840b2-2b4a-3ce76ef0\"\r\nAccept-Ranges:bytes\r\nContent-Length:11082\r\nConnection:close\r\nContent-Type:text/html\r\nx_commoncrawl_ParseSegmentId:3572\r\nx_commoncrawl_OriginalURL:http://www.useeverything.com/iforest/ins2.htm\r\nx_commoncrawl_URLFP:1666020248005402848\r\nx_commoncrawl_HostFP:-142784644528352630\r\nx_commoncrawl_Signature:\r\nx_commoncrawl_CrawlNo:1\r\nx_commoncrawl_FetchTimestamp:1210741174919",
+  "rawFile": "evidence/commoncrawl/raw/20080513215934_www.useeverything.com_iforest_ins2.htm.html",
+  "bytes": 11082,
+  "sha256": "eabc8eacfa63c8d54297ade8a921de6970ccff921dc4a6deab3627e7760f9802"
+}

@@ -76,6 +76,8 @@ These improve the visual reconstruction, especially area selector and marker doc
 
 Public web search still only surfaced the known HowardForums/T-Zones directory listing as useful external corroboration.
 
+A later 2026-05-21 Common Crawl pass found independent public-page corroboration outside Wayback: UseEverything/iForest HTML pages, WAP root decks, and `iForest.pqa`. The saved payloads are under `evidence/commoncrawl`, with details in `docs/commoncrawl-search.md`.
+
 Additional current checks:
 
 - GitHub repository search for exact strings such as `wap.useeverything.com`, `iForest.pqa`, `fun=aboutchar`, and `servlets/mfr` found zero repositories.

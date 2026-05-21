@@ -1,0 +1,19 @@
+{
+  "row": {
+    "timestamp": "20100208155154",
+    "url": "http://wap.littlescreen.co.uk/",
+    "status": "200",
+    "mime": "text/vnd.wap.wml",
+    "digest": "CWVLB7MLSN7LHOYBQQLJH425ZN25UL5P",
+    "filename": "crawl-002/2010/02/16/32/1266357059833_32.arc.gz",
+    "offset": "2258191",
+    "length": "420"
+  },
+  "dataUrl": "https://data.commoncrawl.org/crawl-002/2010/02/16/32/1266357059833_32.arc.gz",
+  "range": "bytes=2258191-2258610",
+  "arcHeader": "http://wap.littlescreen.co.uk/ 91.203.57.6 20100208155154 text/vnd.wap.wml 530",
+  "httpHeader": "HTTP/1.1 200 OK\r\nDate:Mon, 08 Feb 2010 23:51:54 GMT\r\nServer:Apache/1.3.26 (Unix) Debian GNU/Linux mod_gzip/1.3.19.1a mod_auth_pgsql/0.9.12 ApacheJServ/1.1.2 mod_ssl/2.8.9 OpenSSL/0.9.6c\r\nLast-Modified:Sun, 31 Jan 2010 18:39:34 GMT\r\nETag:\"e4400b-6-4b65ce66\"\r\nAccept-Ranges:bytes\r\nContent-Length:6\r\nConnection:close\r\nContent-Type:text/vnd.wap.wml\r\nx_commoncrawl_OriginalURL:http://wap.littlescreen.co.uk/\r\nx_commoncrawl_URLFP:6069524925539155738\r\nx_commoncrawl_HostFP:1231344980\r\nx_commoncrawl_FetchTimestamp:1265673114812",
+  "rawFile": "evidence/commoncrawl/raw/20100208155154_wap.littlescreen.co.uk_root.wml",
+  "bytes": 6,
+  "sha256": "45fd2f9df187bc411dc80df5c4c4844ac00f4dd69bc69453f1893a5d143433d6"
+}

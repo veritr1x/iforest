@@ -1,0 +1,19 @@
+{
+  "row": {
+    "timestamp": "20080516203149",
+    "url": "http://www.useeverything.com/iforest/valleyhelp.htm",
+    "status": "200",
+    "mime": "text/html",
+    "digest": "4QV7X4RE7HPC4I4XSV6SWU3BTZZ6CPLK",
+    "filename": "crawl-001/2008/06/25/1/1214442825903_1.arc.gz",
+    "offset": "68103200",
+    "length": "2379"
+  },
+  "dataUrl": "https://data.commoncrawl.org/crawl-001/2008/06/25/1/1214442825903_1.arc.gz",
+  "range": "bytes=68103200-68105578",
+  "arcHeader": "http://www.useeverything.com/iforest/valleyhelp.htm 91.203.57.6 20080516203149 text/html 10856",
+  "httpHeader": "HTTP/1.1 200 OK\r\nDate:Sat, 17 May 2008 03:31:48 GMT\r\nServer:Apache/1.3.26 (Unix) Debian GNU/Linux mod_gzip/1.3.19.1a mod_auth_pgsql/0.9.12 ApacheJServ/1.1.2 mod_ssl/2.8.9 OpenSSL/0.9.6c\r\nLast-Modified:Sun, 19 May 2002 09:24:01 GMT\r\nETag:\"4840c4-27e8-3ce76f31\"\r\nAccept-Ranges:bytes\r\nContent-Length:10216\r\nConnection:close\r\nContent-Type:text/html\r\nx_commoncrawl_ParseSegmentId:3622\r\nx_commoncrawl_OriginalURL:http://www.useeverything.com/iforest/valleyhelp.htm\r\nx_commoncrawl_URLFP:1543593900137832634\r\nx_commoncrawl_HostFP:4034211254985817041\r\nx_commoncrawl_Signature:\r\nx_commoncrawl_CrawlNo:1\r\nx_commoncrawl_FetchTimestamp:1210995109240",
+  "rawFile": "evidence/commoncrawl/raw/20080516203149_www.useeverything.com_iforest_valleyhelp.htm.html",
+  "bytes": 10216,
+  "sha256": "ea43b68eed0a85c99b9c2ade8a406eb1d82040cacba242546980a07fb59c13b1"
+}

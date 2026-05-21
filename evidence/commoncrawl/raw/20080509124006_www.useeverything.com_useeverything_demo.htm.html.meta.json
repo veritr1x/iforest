@@ -1,0 +1,19 @@
+{
+  "row": {
+    "timestamp": "20080509124006",
+    "url": "http://www.useeverything.com/useeverything/demo.htm",
+    "status": "200",
+    "mime": "text/html",
+    "digest": "24RQ6VTRP57YAM47DW7B34EJEUT7YBR5",
+    "filename": "crawl-001/2008/06/19/15/1213886851170_15.arc.gz",
+    "offset": "14490456",
+    "length": "2478"
+  },
+  "dataUrl": "https://data.commoncrawl.org/crawl-001/2008/06/19/15/1213886851170_15.arc.gz",
+  "range": "bytes=14490456-14492933",
+  "arcHeader": "http://www.useeverything.com/useeverything/demo.htm 91.203.57.6 20080509124006 text/html 11462",
+  "httpHeader": "HTTP/1.1 200 OK\r\nDate:Fri, 09 May 2008 19:40:06 GMT\r\nServer:Apache/1.3.26 (Unix) Debian GNU/Linux mod_gzip/1.3.19.1a mod_auth_pgsql/0.9.12 ApacheJServ/1.1.2 mod_ssl/2.8.9 OpenSSL/0.9.6c\r\nLast-Modified:Sun, 19 May 2002 09:26:36 GMT\r\nETag:\"48412e-2a27-3ce76fcc\"\r\nAccept-Ranges:bytes\r\nContent-Length:10791\r\nConnection:close\r\nContent-Type:text/html\r\nx_commoncrawl_ParseSegmentId:43\r\nx_commoncrawl_OriginalURL:http://www.useeverything.com/useeverything/demo.htm\r\nx_commoncrawl_URLFP:-1417359600639012031\r\nx_commoncrawl_HostFP:-142784644528352630\r\nx_commoncrawl_Signature:94e80252abb3f9929ef6323f33700f21\r\nx_commoncrawl_CrawlNo:1\r\nx_commoncrawl_FetchTimestamp:1210362006547",
+  "rawFile": "evidence/commoncrawl/raw/20080509124006_www.useeverything.com_useeverything_demo.htm.html",
+  "bytes": 10791,
+  "sha256": "f1a043b287019e280d9d10c93ade0d02b40698427e24333be134735f4e74c30a"
+}

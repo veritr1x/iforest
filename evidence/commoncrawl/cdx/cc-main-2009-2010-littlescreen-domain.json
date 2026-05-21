@@ -1,0 +1,30 @@
+{
+  "id": "cc-main-2009-2010-littlescreen-domain",
+  "index": "CC-MAIN-2009-2010",
+  "target": "littlescreen.co.uk/*",
+  "queryUrl": "https://index.commoncrawl.org/CC-MAIN-2009-2010-index?url=littlescreen.co.uk%2F*&output=json&filter=status%3A200&fl=timestamp%2Curl%2Cstatus%2Cmime%2Cdigest%2Cfilename%2Coffset%2Clength&collapse=urlkey&limit=200",
+  "status": 200,
+  "rows": [
+    {
+      "timestamp": "20090703234904",
+      "url": "http://littlescreen.co.uk/",
+      "status": "200",
+      "mime": "text/html",
+      "digest": "65R3O7Q7TGRMHPRD2VQMWQADRQ4HI7OT",
+      "filename": "crawl-002/2009/09/17/15/1253232091524_15.arc.gz",
+      "offset": "57974696",
+      "length": "1007"
+    },
+    {
+      "timestamp": "20100904001237",
+      "url": "http://www.littlescreen.co.uk/",
+      "status": "200",
+      "mime": "text/html",
+      "digest": "65R3O7Q7TGRMHPRD2VQMWQADRQ4HI7OT",
+      "filename": "crawl-002/2010/09/24/28/1285388598897_28.arc.gz",
+      "offset": "7694923",
+      "length": "954"
+    }
+  ],
+  "messages": []
+}

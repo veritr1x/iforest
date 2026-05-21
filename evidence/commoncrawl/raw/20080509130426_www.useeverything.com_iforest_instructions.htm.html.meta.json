@@ -1,0 +1,19 @@
+{
+  "row": {
+    "timestamp": "20080509130426",
+    "url": "http://www.useeverything.com/iforest/instructions.htm",
+    "status": "200",
+    "mime": "text/html",
+    "digest": "4RCGXRVDN67DUJEZLJAENW73CZSSMXVZ",
+    "filename": "crawl-001/2008/06/19/4/1213886509542_4.arc.gz",
+    "offset": "99268288",
+    "length": "2517"
+  },
+  "dataUrl": "https://data.commoncrawl.org/crawl-001/2008/06/19/4/1213886509542_4.arc.gz",
+  "range": "bytes=99268288-99270804",
+  "arcHeader": "http://www.useeverything.com/iforest/instructions.htm 91.203.57.6 20080509130426 text/html 11646",
+  "httpHeader": "HTTP/1.1 200 OK\r\nDate:Fri, 09 May 2008 20:04:25 GMT\r\nServer:Apache/1.3.26 (Unix) Debian GNU/Linux mod_gzip/1.3.19.1a mod_auth_pgsql/0.9.12 ApacheJServ/1.1.2 mod_ssl/2.8.9 OpenSSL/0.9.6c\r\nLast-Modified:Sun, 19 May 2002 09:23:17 GMT\r\nETag:\"4840b9-2ade-3ce76f05\"\r\nAccept-Ranges:bytes\r\nContent-Length:10974\r\nConnection:close\r\nContent-Type:text/html\r\nx_commoncrawl_ParseSegmentId:45\r\nx_commoncrawl_OriginalURL:http://www.useeverything.com/iforest/instructions.htm\r\nx_commoncrawl_URLFP:4469829086761845470\r\nx_commoncrawl_HostFP:-142784644528352630\r\nx_commoncrawl_Signature:ed6ad9c02444a53394ae3ebd9b993b4f\r\nx_commoncrawl_CrawlNo:1\r\nx_commoncrawl_FetchTimestamp:1210363466052",
+  "rawFile": "evidence/commoncrawl/raw/20080509130426_www.useeverything.com_iforest_instructions.htm.html",
+  "bytes": 10974,
+  "sha256": "93495d47f4a490addcf1ca7b6866bef9e583de116d6202e39b55f267a793a1b9"
+}

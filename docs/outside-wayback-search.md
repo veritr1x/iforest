@@ -8,6 +8,7 @@ Search date: 2026-05-15
   - `UseEverything.com Mobile` as a mobile service that "provides you with adventure games for your mobile phone" at `http://wap.useeverything.com/`.
   - `Little Screen` under games as "A role playing adventure game where you decide your characters path" at `http://wap.littlescreen.co.uk`.
 - WebStatsDomain reports that `littlescreenmedia.com` and `littlescreen.co.uk` redirected to `liquidproductions.co.uk` in its later crawl data. This appears to be later domain history, not direct evidence about iForest's original source code or content.
+- Common Crawl older indexes preserve independent copies of public UseEverything/iForest HTML pages, the WAP root decks, and `iForest.pqa`. The saved payloads and CDX responses are under `evidence/commoncrawl`; see `docs/commoncrawl-search.md`.
 
 ## Current Domain Status
 
@@ -21,7 +22,7 @@ Search date: 2026-05-15
 - GitHub repository search for `useeverything.com`, `iforest wap game`, and related terms found no repositories.
 - GitHub code search requires authentication from this environment; public web search for GitHub code hits did not surface usable matches.
 - Grep.app code search was blocked by a Vercel security checkpoint.
-- Common Crawl latest index had no 200-status captures for `useeverything.com` or `littlescreen.co.uk`.
+- Common Crawl latest indexes did not help, and older-index negative scans still found no 200-status captures for the missing backend/WAP paths such as `servlets/Driver*`, `servlets/mfr*`, `wap.useeverything.com/other/*`, and `if.wml`.
 - URLScan had no captures for `useeverything.com`, `littlescreen.co.uk`, or `littlescreenmedia.com`.
 - Internet Archive item search, outside the Wayback web index, found no uploaded collection items for `iForest.pqa`, `wap.useeverything.com`, `littlescreen.co.uk`, or `UseEverything.com Mobile`.
 - Public certificate transparency search returned no useful certificate history for these domains.
@@ -29,6 +30,6 @@ Search date: 2026-05-15
 
 ## Assessment
 
-Outside Wayback, the useful evidence is mostly corroborative rather than reconstructive. It confirms that the services were publicly listed in mobile/WAP directories and categorized as mobile adventure/role-playing games, but it does not add source code, backend data, room text, or a larger map.
+Outside Wayback, the useful evidence is mostly corroborative rather than reconstructive. It confirms that the services were publicly listed in mobile/WAP directories and categorized as mobile adventure/role-playing games. Common Crawl also gives clean independent copies of public pages, WAP roots, and the PQA, but it does not add source code, backend data, hidden room text, or a larger map.
 
 The best next non-Wayback lead is human/source recovery: identify original developers/operators from archived site contact pages or company records and ask whether source, backups, design docs, screenshots, or saved WAP decks still exist.

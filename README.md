@@ -15,6 +15,8 @@ The archived material is under `evidence/wayback`:
 - `raw/html`: recovered desktop help pages, images, and the Palm PQA file
 - `*.json`: Wayback CDX inventories used to find the captures
 
+Independent Common Crawl corroboration is under `evidence/commoncrawl`. It preserves non-Wayback copies of public UseEverything/iForest HTML pages, WAP root decks, and `iForest.pqa`; see `docs/commoncrawl-search.md`.
+
 The recreation is intentionally evidence-led. It preserves the WAP command vocabulary, the login/start pattern, the Forestown/forest/mansion/mountain/valley areas, the wolf thorn puzzle, mall hand-stamp route, pocket limits, strength restoration, skill stones, teleportation sandwiches, spellbooks, game markers, sleeping, hospital/lost-property handling, fairy housekeeping resets, and several recovered servlet rooms.
 
 The current map is in `docs/recreated-game-map.md`. It separates recovered text from inferred connective tissue where the original Java source and XML world files are still missing.

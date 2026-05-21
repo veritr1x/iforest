@@ -1,0 +1,65 @@
+{
+  "target": "www.useeverything.com/servlets/*",
+  "checks": [
+    {
+      "index": "CC-MAIN-2008-2009",
+      "target": "www.useeverything.com/servlets/*",
+      "queryUrl": "https://index.commoncrawl.org/CC-MAIN-2008-2009-index?url=www.useeverything.com%2Fservlets%2F*&output=json&filter=status%3A200&fl=timestamp%2Curl%2Cstatus%2Cmime%2Cdigest%2Cfilename%2Coffset%2Clength&collapse=urlkey&limit=200",
+      "status": 404,
+      "rows": 0,
+      "messages": [
+        {
+          "message": "No Captures found for: www.useeverything.com/servlets/"
+        }
+      ]
+    },
+    {
+      "index": "CC-MAIN-2009-2010",
+      "target": "www.useeverything.com/servlets/*",
+      "queryUrl": "https://index.commoncrawl.org/CC-MAIN-2009-2010-index?url=www.useeverything.com%2Fservlets%2F*&output=json&filter=status%3A200&fl=timestamp%2Curl%2Cstatus%2Cmime%2Cdigest%2Cfilename%2Coffset%2Clength&collapse=urlkey&limit=200",
+      "status": 404,
+      "rows": 0,
+      "messages": [
+        {
+          "message": "No Captures found for: www.useeverything.com/servlets/"
+        }
+      ]
+    },
+    {
+      "index": "CC-MAIN-2012",
+      "target": "www.useeverything.com/servlets/*",
+      "queryUrl": "https://index.commoncrawl.org/CC-MAIN-2012-index?url=www.useeverything.com%2Fservlets%2F*&output=json&filter=status%3A200&fl=timestamp%2Curl%2Cstatus%2Cmime%2Cdigest%2Cfilename%2Coffset%2Clength&collapse=urlkey&limit=200",
+      "status": 404,
+      "rows": 0,
+      "messages": [
+        {
+          "message": "No Captures found for: www.useeverything.com/servlets/"
+        }
+      ]
+    },
+    {
+      "index": "CC-MAIN-2013-20",
+      "target": "www.useeverything.com/servlets/*",
+      "queryUrl": "https://index.commoncrawl.org/CC-MAIN-2013-20-index?url=www.useeverything.com%2Fservlets%2F*&output=json&filter=status%3A200&fl=timestamp%2Curl%2Cstatus%2Cmime%2Cdigest%2Cfilename%2Coffset%2Clength&collapse=urlkey&limit=200",
+      "status": 404,
+      "rows": 0,
+      "messages": [
+        {
+          "message": "No Captures found for: www.useeverything.com/servlets/"
+        }
+      ]
+    },
+    {
+      "index": "CC-MAIN-2013-48",
+      "target": "www.useeverything.com/servlets/*",
+      "queryUrl": "https://index.commoncrawl.org/CC-MAIN-2013-48-index?url=www.useeverything.com%2Fservlets%2F*&output=json&filter=status%3A200&fl=timestamp%2Curl%2Cstatus%2Cmime%2Cdigest%2Cfilename%2Coffset%2Clength&collapse=urlkey&limit=200",
+      "status": 404,
+      "rows": 0,
+      "messages": [
+        {
+          "message": "No Captures found for: www.useeverything.com/servlets/"
+        }
+      ]
+    }
+  ]
+}

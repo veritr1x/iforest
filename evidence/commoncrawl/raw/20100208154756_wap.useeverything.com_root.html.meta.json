@@ -1,0 +1,19 @@
+{
+  "row": {
+    "timestamp": "20100208154756",
+    "url": "http://wap.useeverything.com/",
+    "status": "200",
+    "mime": "text/html",
+    "digest": "EH3ZN3HC4J4TOLEWA2SQZYJ43TCWIYG7",
+    "filename": "crawl-002/2010/02/16/27/1266359604585_27.arc.gz",
+    "offset": "841290",
+    "length": "616"
+  },
+  "dataUrl": "https://data.commoncrawl.org/crawl-002/2010/02/16/27/1266359604585_27.arc.gz",
+  "range": "bytes=841290-841905",
+  "arcHeader": "http://wap.useeverything.com/ 195.26.90.15 20100208154756 text/html 867",
+  "httpHeader": "HTTP/1.1 200 OK\r\nDate:Mon, 08 Feb 2010 23:47:56 GMT\r\nServer:Apache/2.2.3 (CentOS)\r\nLast-Modified:Tue, 22 Dec 2009 10:04:11 GMT\r\nETag:\"d08146-1b0-47b4e53d55cc0\"\r\nAccept-Ranges:bytes\r\nContent-Length:432\r\nConnection:close\r\nContent-Type:text/html; charset=UTF-8\r\nx_commoncrawl_OriginalURL:http://wap.useeverything.com/\r\nx_commoncrawl_URLFP:825132741831881344\r\nx_commoncrawl_HostFP:1121153029\r\nx_commoncrawl_FetchTimestamp:1265672876527",
+  "rawFile": "evidence/commoncrawl/raw/20100208154756_wap.useeverything.com_root.html",
+  "bytes": 432,
+  "sha256": "847c8b14633c84daf1fac8cfc182f28fd5ad7e659a35fc79e4260d1450a088cc"
+}
