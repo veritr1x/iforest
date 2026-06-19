@@ -309,6 +309,41 @@ describe('iForest reconstructed game engine', () => {
     assert.match(looked.message, new RegExp(a.player.face));
   });
 
+  it('preserves the lost-property pile across a fairy housekeeping reset', () => {
+    let game = createGame({ name: 'Hapless' });
+    game = {
+      ...game,
+      player: { ...game.player, location: 'forest-edge', strength: 5, inventory: ['map'] }
+    };
+
+    game = applyCommand(game, { verb: 'attack', target: 'wolf' });
+    assert.ok(game.world.itemLocations['lost-property'].includes('map'));
+
+    const resetsBefore = game.world.resets;
+    for (let i = 0; i < 7; i += 1) {
+      game = applyCommand(game, { verb: 'wait' });
+    }
+    assert.equal(game.world.resets, resetsBefore + 1, 'a reset should have fired');
+    assert.ok(
+      game.world.itemLocations['lost-property'].includes('map'),
+      'lost property survives the reset'
+    );
+  });
+
+  it('accumulates a capped message log across turns', () => {
+    let game = createGame({ name: 'Logger' });
+    assert.ok(Array.isArray(game.log) && game.log.length >= 1);
+
+    game = applyCommand(game, { verb: 'look' });
+    const last = game.log[game.log.length - 1];
+    assert.equal(last, game.message);
+
+    for (let i = 0; i < 40; i += 1) {
+      game = applyCommand(game, { verb: 'wait' });
+    }
+    assert.ok(game.log.length <= 20, 'log is capped at 20 entries');
+  });
+
   it('documents the social-action menu, account system, WAPJAG gateway, and sibling-game routing', () => {
     const game = createGame({ name: 'Archivist' });
     assert.ok(

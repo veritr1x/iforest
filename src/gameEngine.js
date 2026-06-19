@@ -145,6 +145,27 @@ export function listCommands(game) {
   return [...new Set(verbs)].map((verb) => ({ verb, label: verb[0].toUpperCase() + verb.slice(1) }));
 }
 
+const VERB_HANDLERS = {
+  look: (game, room) => describe(game, room.description),
+  inventory: (game) => showInventory(game),
+  i: (game) => showInventory(game),
+  take: (game, room, target) => takeItem(game, room, target),
+  drop: (game, room, target) => dropItem(game, room, target),
+  examine: (game, room, target) => examine(game, room, target),
+  use: (game, room, target) => useItem(game, room, target),
+  attack: (game, room, target) => attack(game, room, target),
+  wait: (game) => describe(game, 'The WAP screen refreshes, reporting anything that has changed nearby.'),
+  sleep: (game, room) => sleep(game, room),
+  dive: (game, room) => dive(game, room),
+  climb: (game, room) => climb(game, room),
+  claim: (game, room) => claimMarker(game, room),
+  read: (game, room, target) => readItem(game, room, target),
+  cast: (game, _room, target) => castSpell(game, target),
+  stamp: (game, room) => stamp(game, room),
+  smile: (game) => socialAction(game),
+  'say hello': (game) => socialAction(game)
+};
+
 export function applyCommand(currentGame, command) {
   const game = clone(currentGame);
   const verb = normalize(command?.verb);
@@ -152,89 +173,62 @@ export function applyCommand(currentGame, command) {
   const room = rooms[game.player.location];
 
   if (!verb) {
-    return describe(game, 'What now?');
+    return finalize(describe(game, 'What now?'));
   }
 
   game.world.turns = (game.world.turns || 0) + 1;
   game.player.asleep = false;
-  runHousekeeping(game);
 
+  const result = dispatch(game, room, verb, target);
+
+  // Housekeeping runs after the player's action so the move/take/drop they just
+  // issued operates on the world as they saw it; the reset is then announced and
+  // folded into the message via a second describe pass.
+  runHousekeeping(result);
+  const described = result.world.housekeepingMessage
+    ? describe(result, result.message)
+    : result;
+
+  return finalize(described);
+}
+
+function dispatch(game, room, verb, target) {
   if (DIRECTIONS.has(verb)) {
     return move(game, room, verb);
   }
 
-  if (verb === 'look') {
-    return describe(game, room.description);
-  }
-
-  if (verb === 'inventory' || verb === 'i') {
-    const carried = game.player.inventory.map((itemId) => items[itemId].name).join(', ');
-    const spells = game.player.spells?.length ? ` Spells: ${game.player.spells.join(', ')}.` : '';
-    return describe(game, carried ? `You are carrying ${carried}.${spells}` : `Your pockets are empty.${spells}`);
-  }
-
-  if (verb === 'take') {
-    return takeItem(game, room, target);
-  }
-
-  if (verb === 'drop') {
-    return dropItem(game, room, target);
-  }
-
-  if (verb === 'examine') {
-    return examine(game, room, target);
-  }
-
-  if (verb === 'use') {
-    return useItem(game, room, target);
-  }
-
-  if (verb === 'attack') {
-    return attack(game, room, target);
-  }
-
-  if (verb === 'wait') {
-    return describe(game, 'The WAP screen refreshes, reporting anything that has changed nearby.');
-  }
-
-  if (verb === 'sleep') {
-    return sleep(game, room);
-  }
-
-  if (verb === 'dive') {
-    return dive(game, room);
-  }
-
-  if (verb === 'climb') {
-    return climb(game, room);
-  }
-
-  if (verb === 'claim') {
-    return claimMarker(game, room);
-  }
-
-  if (verb === 'read') {
-    return readItem(game, room, target);
-  }
-
-  if (verb === 'cast') {
-    return castSpell(game, target);
-  }
-
-  if (verb === 'stamp') {
-    if (room.id !== 'tourist-info-booth') {
-      return describe(game, 'There is no tourist information booth here.');
-    }
-
-    game.flags.handStamped = true;
-    return describe(game, 'Your hand is stamped for the Forestown Mall.');
-  }
-
-  if (verb === 'smile' || verb === 'say hello') {
-    return describe(game, 'You perform a friendly preset action from the later player-interaction update.');
+  const handler = VERB_HANDLERS[verb];
+  if (handler) {
+    return handler(game, room, target);
   }
 
   return describe(game, 'I do not know that verb.');
+}
+
+function finalize(described) {
+  if (described.message) {
+    described.log = [...(described.log || []), described.message].slice(-20);
+  }
+  return described;
+}
+
+function showInventory(game) {
+  const carried = game.player.inventory.map((itemId) => items[itemId]?.name || itemId).join(', ');
+  const spells = game.player.spells?.length ? ` Spells: ${game.player.spells.join(', ')}.` : '';
+  return describe(game, carried ? `You are carrying ${carried}.${spells}` : `Your pockets are empty.${spells}`);
+}
+
+function stamp(game, room) {
+  if (room.id !== 'tourist-info-booth') {
+    return describe(game, 'There is no tourist information booth here.');
+  }
+
+  game.flags.handStamped = true;
+  return describe(game, 'Your hand is stamped for the Forestown Mall.');
+}
+
+function socialAction(game) {
+  return describe(game, 'You perform a friendly preset action from the later player-interaction update.');
 }
 
 function move(game, room, direction) {
@@ -510,7 +504,14 @@ function runHousekeeping(game) {
     return;
   }
 
-  game.world.itemLocations = initialItemLocations();
+  // Fairies reset each location to its initial objects, replacing taken items and
+  // clearing dropped ones (taken objects intentionally respawn, per the tech pages).
+  // Lost property is a recovery store rather than a normal location, so its contents
+  // survive the reset instead of being wiped.
+  const lostProperty = game.world.itemLocations['lost-property'] || [];
+  const fresh = initialItemLocations();
+  fresh['lost-property'] = [...new Set([...(fresh['lost-property'] || []), ...lostProperty])];
+  game.world.itemLocations = fresh;
   game.world.resets += 1;
   game.world.housekeepingMessage =
     'The fairies quietly reset the location documents, replacing taken objects and tidying dropped ones.';
