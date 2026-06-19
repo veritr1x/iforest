@@ -1,5 +1,5 @@
 import { computeMapLayout } from './mapLayout.js';
-import { rooms as roomData } from './engine/gameData.js';
+import { rooms as roomData, FACES } from './engine/gameData.js';
 
 const DIRECTIONS = ['north', 'south', 'east', 'west'];
 const DIRECTION_LABEL = { north: 'N', south: 'S', east: 'E', west: 'W' };
@@ -35,6 +35,8 @@ const ZERO_ARITY = new Set([
 ]);
 const INVENTORY_ONLY = new Set(['drop', 'cast', 'read']);
 const STORAGE_KEY = 'iforest:state';
+const SESSION_KEY = 'iforest:sessionId';
+const SCHEMA_VERSION = 2;
 
 const MAP_CELL_W = 52;
 const MAP_CELL_H = 34;
@@ -48,6 +50,7 @@ let armedVerb = null;
 let activePanel = null;
 let serverMode = false;
 let staticEngine = null;
+let selectedGender = 'female';
 
 const el = {
   screen: document.querySelector('#screen'),
@@ -72,8 +75,34 @@ const el = {
   menuDialog: document.querySelector('#menu-dialog'),
   menuCancel: document.querySelector('#menu-cancel'),
   startForm: document.querySelector('#start-form'),
-  playerName: document.querySelector('#player-name')
+  playerName: document.querySelector('#player-name'),
+  playerFace: document.querySelector('#player-face'),
+  genderToggle: document.querySelector('#gender-toggle')
 };
+
+function populateFaces(gender) {
+  const faces = FACES[gender] || [];
+  el.playerFace.replaceChildren(
+    ...faces.map((face) => {
+      const option = document.createElement('option');
+      option.value = face;
+      option.textContent = face;
+      return option;
+    })
+  );
+}
+
+el.genderToggle.querySelectorAll('.toggle-key').forEach((button) => {
+  button.addEventListener('click', () => {
+    selectedGender = button.dataset.gender;
+    el.genderToggle.querySelectorAll('.toggle-key').forEach((other) => {
+      other.setAttribute('aria-pressed', String(other === button));
+    });
+    populateFaces(selectedGender);
+  });
+});
+
+populateFaces(selectedGender);
 
 el.menuButton.addEventListener('click', () => el.menuDialog.showModal());
 el.menuCancel.addEventListener('click', () => el.menuDialog.close());
@@ -84,7 +113,7 @@ el.menuDialog.addEventListener('click', (event) => {
 el.startForm.addEventListener('submit', async (event) => {
   event.preventDefault();
   el.menuDialog.close();
-  await startGame(el.playerName.value);
+  await startGame(el.playerName.value, selectedGender, el.playerFace.value);
 });
 
 el.armedCancel.addEventListener('click', () => setArmed(null));
@@ -116,20 +145,41 @@ async function detectMode() {
   staticEngine = await import('./engine/gameEngine.js');
 }
 
-async function startGame(name) {
-  if (serverMode) {
-    const response = await fetch('api/new', {
-      method: 'POST',
-      headers: { 'content-type': 'application/json' },
-      body: JSON.stringify({ name })
-    });
-    const payload = await response.json();
-    sessionId = payload.id;
-    currentGame = payload.game;
-  } else {
-    currentGame = staticEngine.createGame({ name, login: true });
-    sessionId = 'local';
-    persistState();
+async function postJson(path, body) {
+  const response = await fetch(path, {
+    method: 'POST',
+    headers: { 'content-type': 'application/json' },
+    body: JSON.stringify(body)
+  });
+  if (!response.ok) {
+    const error = new Error(`Request to ${path} failed`);
+    error.status = response.status;
+    throw error;
+  }
+  return response.json();
+}
+
+function showError(text) {
+  if (el.message) {
+    el.message.textContent = text;
+  }
+}
+
+async function startGame(name, gender = selectedGender, face = el.playerFace?.value) {
+  try {
+    if (serverMode) {
+      const payload = await postJson('api/new', { name, gender, face });
+      sessionId = payload.id;
+      currentGame = payload.game;
+      rememberServerSession();
+    } else {
+      currentGame = staticEngine.createGame({ name, gender, face, login: true });
+      sessionId = 'local';
+      persistState();
+    }
+  } catch (_) {
+    showError('Could not start a new game. Is the server running?');
+    return;
   }
   initMapState();
   setArmed(null);
@@ -144,12 +194,19 @@ async function runCommand(verb, target = '') {
   const prevDetailRoomId = currentGame?.mapDetailRoomId ?? null;
 
   if (serverMode) {
-    const response = await fetch('api/command', {
-      method: 'POST',
-      headers: { 'content-type': 'application/json' },
-      body: JSON.stringify({ id: sessionId, command: { verb, target } })
-    });
-    const payload = await response.json();
+    let payload;
+    try {
+      payload = await postJson('api/command', { id: sessionId, command: { verb, target } });
+    } catch (error) {
+      if (error.status === 404) {
+        // The server forgot our session (restart or expiry); start a fresh game.
+        showError('Your session expired. Starting a new game…');
+        await startGame(currentGame?.player?.name || 'Jane');
+        return;
+      }
+      showError('Command failed. Check your connection and try again.');
+      return;
+    }
     currentGame = payload.game;
   } else {
     currentGame = staticEngine.applyCommand(currentGame, { verb, target });
@@ -176,6 +233,7 @@ function persistState() {
   try {
     const { mapLayout: _mapLayout, ...rest } = currentGame;
     const snapshot = {
+      version: SCHEMA_VERSION,
       ...rest,
       visitedRooms: currentGame.visitedRooms ? [...currentGame.visitedRooms] : []
     };
@@ -191,11 +249,47 @@ function restoreState() {
     const raw = sessionStorage.getItem(STORAGE_KEY);
     if (!raw) return false;
     const parsed = JSON.parse(raw);
+    // Discard saves from an older shape so a renamed room/item can't crash render.
+    if (parsed.version !== SCHEMA_VERSION || !parsed.player || !roomData[parsed.player.location]) {
+      sessionStorage.removeItem(STORAGE_KEY);
+      return false;
+    }
     currentGame = parsed;
     currentGame.visitedRooms = new Set(parsed.visitedRooms || [currentGame.player.location]);
     currentGame.mapLayout = computeMapLayout(roomData, currentGame.player.location);
     currentGame.mapDetailRoomId = null;
     sessionId = 'local';
+    return true;
+  } catch (_) {
+    return false;
+  }
+}
+
+function rememberServerSession() {
+  try {
+    sessionStorage.setItem(SESSION_KEY, sessionId);
+  } catch (_) {
+    // storage unavailable
+  }
+}
+
+async function restoreServerSession() {
+  if (!serverMode) return false;
+  let storedId;
+  try {
+    storedId = sessionStorage.getItem(SESSION_KEY);
+  } catch (_) {
+    return false;
+  }
+  if (!storedId) return false;
+  try {
+    const response = await fetch(`api/state?id=${encodeURIComponent(storedId)}`, { cache: 'no-store' });
+    if (!response.ok) return false;
+    const payload = await response.json();
+    if (!payload.game?.player) return false;
+    sessionId = storedId;
+    currentGame = payload.game;
+    initMapState();
     return true;
   } catch (_) {
     return false;
@@ -267,6 +361,7 @@ function renderVerbs(view) {
       if (verb === 'attack') button.classList.add('danger');
       if (verb === armedVerb) button.classList.add('armed');
       button.textContent = verb;
+      button.setAttribute('aria-pressed', String(verb === armedVerb));
       button.addEventListener('click', () => onVerb(verb));
       return button;
     })
@@ -321,8 +416,7 @@ function renderObjects(verb) {
 
   if (objects.size === 0) {
     const empty = document.createElement('span');
-    empty.className = 'key';
-    empty.style.cssText = 'opacity:0.6;background:transparent;border-style:dashed;';
+    empty.className = 'key placeholder';
     empty.textContent = 'no objects';
     el.objectRow.replaceChildren(empty);
     return;
@@ -388,6 +482,32 @@ function renderPanel(name) {
     renderMap(view);
     return;
   }
+
+  if (name === 'log') {
+    el.sheetTitle.textContent = 'Log';
+    renderLog();
+    return;
+  }
+}
+
+function renderLog() {
+  const entries = currentGame?.log || [];
+  if (!entries.length) {
+    const empty = document.createElement('p');
+    empty.className = 'sheet-empty';
+    empty.textContent = 'Nothing has happened yet.';
+    el.sheetBody.append(empty);
+    return;
+  }
+
+  const ul = document.createElement('ul');
+  ul.className = 'log-list';
+  entries.forEach((entry) => {
+    const li = document.createElement('li');
+    li.textContent = entry;
+    ul.append(li);
+  });
+  el.sheetBody.append(ul);
 }
 
 function renderMap(view) {
@@ -586,8 +706,8 @@ function sectionLinks(title, entries) {
 
   if (!entries.length) {
     const empty = document.createElement('p');
+    empty.className = 'sheet-empty';
     empty.textContent = 'No room-specific evidence linked.';
-    empty.style.color = 'var(--ink-dim)';
     wrap.append(empty);
     return wrap;
   }
@@ -609,7 +729,13 @@ function sectionLinks(title, entries) {
 }
 
 await detectMode();
-if (restoreState()) {
+if (serverMode) {
+  if (await restoreServerSession()) {
+    render();
+  } else {
+    await startGame('Jane');
+  }
+} else if (restoreState()) {
   render();
 } else {
   await startGame('Jane');

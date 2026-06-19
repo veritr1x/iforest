@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="styles.css" />
   </head>
   <body>
-    <div class="phone" role="application" aria-label="iForest WAP game">
+    <div class="phone" aria-label="iForest WAP game">
       <header class="chrome-bar">
         <a class="repo-link" href="https://github.com/veritr1x/iforest" target="_blank" rel="noopener noreferrer" aria-label="View source on GitHub">
           <svg viewBox="0 0 16 16" width="14" height="14" aria-hidden="true" focusable="false">
@@ -48,6 +48,7 @@
         <button class="tab-key" type="button" data-panel="inventory">Inv</button>
         <button class="tab-key" type="button" data-panel="here">Here</button>
         <button class="tab-key" type="button" data-panel="map">Map</button>
+        <button class="tab-key" type="button" data-panel="log">Log</button>
       </nav>
 
       <aside id="sheet" class="sheet" hidden aria-label="Status panel">
@@ -65,6 +66,17 @@
         <label>
           Player name
           <input id="player-name" name="name" maxlength="12" value="Jane" autocomplete="off" />
+        </label>
+        <fieldset class="menu-field">
+          <legend>Gender</legend>
+          <div class="menu-toggle" id="gender-toggle" role="radiogroup" aria-label="Gender">
+            <button type="button" class="toggle-key" data-gender="female" aria-pressed="true">Female</button>
+            <button type="button" class="toggle-key" data-gender="male" aria-pressed="false">Male</button>
+          </div>
+        </fieldset>
+        <label>
+          Face
+          <select id="player-face" name="face"></select>
         </label>
         <div class="menu-actions">
           <button type="button" id="menu-cancel">Cancel</button>
